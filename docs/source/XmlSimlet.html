@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-ajax-XmlSimlet'>/**
+</span> * This class simulates XML-based requests.
+ */
+Ext.define(&#39;Ext.ux.ajax.XmlSimlet&#39;, {
+    extend: &#39;Ext.ux.ajax.DataSimlet&#39;,
+    alias: &#39;simlet.xml&#39;,
+
+<span id='Ext-ux-ajax-XmlSimlet-property-xmlTpl'>    /**
+</span>     * This template is used to populate the XML response. The configuration of the Reader
+     * is available so that its `root` and `record` properties can be used as well as the
+     * `fields` of the associated `model`. But beyond that, the way these pieces are put
+     * together in the document requires the flexibility of a template.
+     */
+    xmlTpl: [
+        &#39;&lt;{root}&gt;\n&#39;,
+            &#39;&lt;tpl for=&quot;data&quot;&gt;&#39;,
+        &#39;    &lt;{parent.record}&gt;\n&#39;,
+                &#39;&lt;tpl for=&quot;parent.fields&quot;&gt;&#39;,
+        &#39;        &lt;{name}&gt;{[parent[values.name]]}&lt;/{name}&gt;\n&#39;,
+                &#39;&lt;/tpl&gt;&#39;,
+        &#39;    &lt;/{parent.record}&gt;\n&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+        &#39;&lt;/{root}&gt;&#39;
+    ],
+
+<span id='Ext-ux-ajax-XmlSimlet-method-doGet'>    doGet: function (ctx) {
+</span>        var me = this,
+            data = me.getData(ctx),
+            page = me.getPage(ctx, data),
+            proxy = ctx.xhr.options.operation.getProxy(),
+            reader = proxy &amp;&amp; proxy.getReader(),
+            model = reader &amp;&amp; reader.getModel(),
+            ret = me.callParent(arguments), // pick up status/statusText
+            response = {
+                data: page,
+                reader: reader,
+                fields: model &amp;&amp; model.fields,
+                root: reader &amp;&amp; reader.getRootProperty(),
+                record: reader &amp;&amp; reader.record
+            },
+            tpl, xml, doc;
+
+        if (ctx.groupSpec) {
+            response.summaryData = me.getSummary(ctx, data, page);
+        }
+
+        // If a straight Ajax request there won&#39;t be an xmlTpl.
+        if (me.xmlTpl) {
+            tpl = Ext.XTemplate.getTpl(me, &#39;xmlTpl&#39;);
+            xml = tpl.apply(response);
+        } else {
+            xml = data;
+        }
+
+        if (typeof DOMParser != &#39;undefined&#39;) {
+            doc = (new DOMParser()).parseFromString(xml, &quot;text/xml&quot;);
+        } else {
+            // IE doesn&#39;t have DOMParser, but fortunately, there is an ActiveX for XML
+            doc = new ActiveXObject(&quot;Microsoft.XMLDOM&quot;);
+            doc.async = false;
+            doc.loadXML(xml);
+        }
+
+        ret.responseText = xml;
+        ret.responseXML = doc;
+        return ret;
+    },
+
+<span id='Ext-ux-ajax-XmlSimlet-method-fixTree'>    fixTree: function() {
+</span>        this.callParent(arguments);
+        var buffer = [];
+        this.buildTreeXml(this.data, buffer);
+        this.data = buffer.join(&#39;&#39;);
+    },
+
+<span id='Ext-ux-ajax-XmlSimlet-method-buildTreeXml'>    buildTreeXml: function(nodes, buffer) {
+</span>        var rootProperty = this.rootProperty,
+            recordProperty = this.recordProperty;
+
+        buffer.push(&#39;&lt;&#39;, rootProperty, &#39;&gt;&#39;);
+        Ext.Array.forEach(nodes, function(node) {
+            buffer.push(&#39;&lt;&#39;, recordProperty, &#39;&gt;&#39;);
+            for (var key in node) {
+                if (key == &#39;children&#39;) {
+                    this.buildTreeXml(node.children, buffer);
+                } else {
+                    buffer.push(&#39;&lt;&#39;, key, &#39;&gt;&#39;, node[key], &#39;&lt;/&#39;, key, &#39;&gt;&#39;);
+                }
+            }
+            buffer.push(&#39;&lt;/&#39;, recordProperty, &#39;&gt;&#39;);
+        });
+        buffer.push(&#39;&lt;/&#39;, rootProperty, &#39;&gt;&#39;);
+    }
+
+
+});
+</pre>
+</body>
+</html>

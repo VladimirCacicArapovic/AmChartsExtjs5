@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-dashboard-GoogleRssView'>/**
+</span> * This view is created by the &quot;google-rss&quot; `Ext.dashboard.Dashboard` part.
+ */
+Ext.define(&#39;Ext.ux.dashboard.GoogleRssView&#39;, {
+    extend: &#39;Ext.Component&#39;,
+
+    requires: [
+        &#39;Ext.tip.ToolTip&#39;,
+        &#39;Ext.ux.google.Feeds&#39;
+    ],
+
+<span id='Ext-ux-dashboard-GoogleRssView-property-feedCls'>    feedCls: Ext.baseCSSPrefix + &#39;dashboard-googlerss&#39;,
+</span><span id='Ext-ux-dashboard-GoogleRssView-property-previewCls'>    previewCls: Ext.baseCSSPrefix + &#39;dashboard-googlerss-preview&#39;,
+</span>
+<span id='Ext-ux-dashboard-GoogleRssView-property-closeDetailsCls'>    closeDetailsCls: Ext.baseCSSPrefix + &#39;dashboard-googlerss-close&#39;,
+</span><span id='Ext-ux-dashboard-GoogleRssView-property-nextCls'>    nextCls: Ext.baseCSSPrefix + &#39;dashboard-googlerss-next&#39;,
+</span><span id='Ext-ux-dashboard-GoogleRssView-property-prevCls'>    prevCls: Ext.baseCSSPrefix + &#39;dashboard-googlerss-prev&#39;,
+</span>
+<span id='Ext-ux-dashboard-GoogleRssView-property-feedUrl'>    /**
+</span>     * The RSS feed URL. Some example RSS Feeds:
+     *
+     *   * http://rss.slashdot.org/Slashdot/slashdot
+     *   * http://sports.espn.go.com/espn/rss/news (ESPN Top News)
+     *   * http://news.google.com/news?ned=us&amp;topic=t&amp;output=rss (Sci/Tech - Google News)
+     *   * http://rss.news.yahoo.com/rss/software (Yahoo Software News)
+     *   * http://feeds.feedburner.com/extblog (Sencha Blog)
+     *   * http://sencha.com/forum/external.php?type=RSS2 (Sencha Forums)
+     *   * http://feeds.feedburner.com/ajaxian (Ajaxian)
+     *   * http://rss.cnn.com/rss/edition.rss (CNN Top Stories)
+     */
+    feedUrl: null,
+
+<span id='Ext-ux-dashboard-GoogleRssView-cfg-scrollable'>    scrollable: true,
+</span>
+<span id='Ext-ux-dashboard-GoogleRssView-property-maxFeedEntries'>    maxFeedEntries: 10,
+</span>
+<span id='Ext-ux-dashboard-GoogleRssView-property-previewTips'>    previewTips: false,
+</span>
+<span id='Ext-ux-dashboard-GoogleRssView-property-mode'>    mode: &#39;detail&#39;,
+</span>
+<span id='Ext-ux-dashboard-GoogleRssView-property-closeDetailsGlyph'>    //closeDetailsGlyph: &#39;10008@&#39;,
+</span>    closeDetailsGlyph: &#39;8657@&#39;,
+
+<span id='Ext-ux-dashboard-GoogleRssView-property-prevGlyph'>    // black triangles
+</span><span id='Ext-ux-dashboard-GoogleRssView-property-nextGlyph'>    prevGlyph: &#39;9664@&#39;, nextGlyph: &#39;9654@&#39;,
+</span>
+    // hollow triangles
+    //prevGlyph: &#39;9665@&#39;, nextGlyph: &#39;9655@&#39;,
+
+    // black pointing index
+    //prevGlyph: &#39;9754@&#39;, nextGlyph: &#39;9755@&#39;,
+
+    // white pointing index
+    //prevGlyph: &#39;9756@&#39;, nextGlyph: &#39;9758@&#39;,
+
+    // double arrows
+    //prevGlyph: &#39;8656@&#39;, nextGlyph: &#39;8658@&#39;,
+
+<span id='Ext-ux-dashboard-GoogleRssView-property-detailTpl'>    // closed arrows
+</span>    //prevGlyph: &#39;8678@&#39;, nextGlyph: &#39;8680@&#39;,
+
+    detailTpl:
+        &#39;&lt;tpl for=&quot;entries[currentEntry]&quot;&gt;&#39; +
+            &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-detail-header&quot;&gt;&#39; +
+                &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-detail-nav&quot;&gt;&#39; +
+                    &#39;&lt;tpl if=&quot;parent.hasPrev&quot;&gt;&#39; +
+                        &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-prev &#39; +
+                                Ext.baseCSSPrefix + &#39;dashboard-googlerss-glyph&quot;&gt;&#39;+
+                            &#39;{parent.prevGlyph}&#39; +
+                        &#39;&lt;/span&gt; &#39;+
+                    &#39;&lt;/tpl&gt;&#39; +
+                    &#39; {[parent.currentEntry+1]}/{parent.numEntries} &#39; +
+                    &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-next &#39; +
+                                Ext.baseCSSPrefix + &#39;dashboard-googlerss-glyph&quot;&#39; +
+                        &#39;&lt;tpl if=&quot;!parent.hasNext&quot;&gt;&#39; +
+                            &#39; style=&quot;visibility:hidden&quot;&#39;+
+                        &#39;&lt;/tpl&gt;&#39; +
+                        &#39;&gt; {parent.nextGlyph}&#39; +
+                    &#39;&lt;/span&gt; &#39;+
+                    &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-close &#39; +
+                                Ext.baseCSSPrefix + &#39;dashboard-googlerss-glyph&quot;&gt; &#39; +
+                        &#39;{parent.closeGlyph}&#39; +
+                    &#39;&lt;/span&gt; &#39;+
+                &#39;&lt;/div&gt;&#39; +
+                &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-title&quot;&gt;&#39;+
+                    &#39;&lt;a href=&quot;{link}&quot; target=_blank&gt;{title}&lt;/a&gt;&#39;+
+                &#39;&lt;/div&gt;&#39;+
+                &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-author&quot;&gt;By {author} - {publishedDate:this.date}&lt;/div&gt;&#39; +
+            &#39;&lt;/div&gt;&#39; +
+            &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-detail&quot;&gt;&#39; +
+                &#39;{content}&#39; +
+            &#39;&lt;/div&gt;&#39; +
+        &#39;&lt;/tpl&gt;&#39;,
+
+<span id='Ext-ux-dashboard-GoogleRssView-property-summaryTpl'>    summaryTpl:
+</span>        &#39;&lt;tpl for=&quot;entries&quot;&gt;&#39; +
+            &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss&quot;&gt;&#39; +
+                &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-title&quot;&gt;&#39;+
+                    &#39;&lt;a href=&quot;{link}&quot; target=_blank&gt;{title}&lt;/a&gt;&#39;+
+                &#39;&lt;/span&gt; &#39;+
+                &#39;&lt;img src=&quot;&#39;+Ext.BLANK_IMAGE_URL+&#39;&quot; data-index=&quot;{#}&quot; class=&quot;&#39;+Ext.baseCSSPrefix+&#39;dashboard-googlerss-preview&quot;&gt;&lt;br&gt;&#39; +
+                &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-author&quot;&gt;By {author} - {publishedDate:this.date}&lt;/span&gt;&lt;br&gt;&#39; +
+                &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;dashboard-googlerss-snippet&quot;&gt;{contentSnippet}&lt;/span&gt;&lt;br&gt;&#39; +
+            &#39;&lt;/div&gt;&#39; +
+        &#39;&lt;/tpl&gt;&#39;,
+
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-initComponent'>    initComponent: function () {
+</span>        var me = this;
+
+        me.feedMgr = new google.feeds.Feed(me.feedUrl);
+
+        me.callParent();
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-afterRender'>    afterRender: function () {
+</span>        var me = this;
+
+        me.callParent();
+
+        if (me.feedMgr) {
+            me.refresh();
+        }
+
+        me.el.on({
+            click: me.onClick,
+            scope: me
+        });
+
+        if (me.previewTips) {
+            me.tip = new Ext.tip.ToolTip({
+                target: me.el,
+                delegate: &#39;.&#39; + me.previewCls,
+                maxWidth: 800,
+                showDelay: 750,
+                autoHide: false,
+                scrollable: true,
+                anchor: &#39;top&#39;,
+                listeners: {
+                    beforeshow: &#39;onBeforeShowTip&#39;,
+                    scope: me
+                }
+            });
+        }
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-formatDate'>    formatDate: function (date) {
+</span>        if (!date) {
+            return &#39;&#39;;
+        }
+
+        date = new Date(date);
+        var now = new Date(),
+            d = Ext.Date.clearTime(now, true),
+            notime = Ext.Date.clearTime(date, true).getTime();
+
+        if (notime === d.getTime()) {
+            return &#39;Today &#39; + Ext.Date.format(date, &#39;g:i a&#39;);
+        }
+
+        d = Ext.Date.add(d, &#39;d&#39;, -6);
+        if (d.getTime() &lt;= notime) {
+            return Ext.Date.format(date, &#39;D g:i a&#39;);
+        }
+        if (d.getYear() === now.getYear()) {
+            return Ext.Date.format(date, &#39;D M d \\a\\t g:i a&#39;);
+        }
+
+        return Ext.Date.format(date, &#39;D M d, Y \\a\\t g:i a&#39;);
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-getTitle'>    getTitle: function () {
+</span>        var data = this.data;
+        return data &amp;&amp; data.title;
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-onBeforeShowTip'>    onBeforeShowTip: function (tip) {
+</span>        if (this.mode !== &#39;summary&#39;) {
+            return false;
+        }
+
+        var el = tip.triggerElement,
+            index = parseInt(el.getAttribute(&#39;data-index&#39;), 10);
+
+        tip.maxHeight = Ext.Element.getViewportHeight() / 2;
+        tip.update(this.data.entries[index - 1].content);
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-onClick'>    onClick: function (e) {
+</span>        var me = this,
+            entry = me.data.currentEntry,
+            target = Ext.fly(e.getTarget());
+
+        if (target.hasCls(me.nextCls)) {
+            me.setCurrentEntry(entry+1);
+        } else if (target.hasCls(me.prevCls)) {
+            me.setCurrentEntry(entry-1);
+        } else if (target.hasCls(me.closeDetailsCls)) {
+            me.setMode(&#39;summary&#39;);
+        } else if (target.hasCls(me.previewCls)) {
+            me.setMode(&#39;detail&#39;, parseInt(target.getAttribute(&#39;data-index&#39;), 10));
+        }
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-refresh'>    refresh: function () {
+</span>        var me = this;
+
+        if (!me.feedMgr) {
+            return;
+        }
+
+        me.fireEvent(&#39;beforeload&#39;, me);
+        //setTimeout(function () {
+
+        me.feedMgr.setNumEntries(me.maxFeedEntries);
+        me.feedMgr.load(function (result) {
+            me.setFeedData(result.feed);
+            me.fireEvent(&#39;load&#39;, me);
+        });
+        //}, 2000);
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-setCurrentEntry'>    setCurrentEntry: function (current) {
+</span>        this.setMode(this.mode, current);
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-setFeedData'>    setFeedData: function (feedData) {
+</span>        var me = this,
+            entries = feedData.entries,
+            count = entries &amp;&amp; entries.length || 0,
+            data = Ext.apply({
+                numEntries: count,
+                closeGlyph: me.wrapGlyph(me.closeDetailsGlyph),
+                prevGlyph: me.wrapGlyph(me.prevGlyph),
+                nextGlyph: me.wrapGlyph(me.nextGlyph),
+                currentEntry: 0
+            }, feedData);
+
+        me.data = data;
+        me.setMode(me.mode);
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-setMode'>    setMode: function (mode, currentEntry) {
+</span>        var me = this,
+            data = me.data,
+            current = (currentEntry === undefined) ? data.currentEntry : currentEntry;
+
+        me.tpl = me.getTpl(mode + &#39;Tpl&#39;);
+        me.tpl.date = me.formatDate;
+        me.mode = mode;
+
+        data.currentEntry = current;
+        data.hasNext = current+1 &lt; data.numEntries;
+        data.hasPrev = current &gt; 0;
+
+        me.update(data);
+        me.el.dom.scrollTop = 0;
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-wrapGlyph'>    wrapGlyph: function (glyph) {
+</span>        var glyphFontFamily = Ext._glyphFontFamily,
+            glyphParts,
+            html;
+
+        if (typeof glyph === &#39;string&#39;) {
+            glyphParts = glyph.split(&#39;@&#39;);
+            glyph = glyphParts[0];
+            glyphFontFamily = glyphParts[1];
+        }
+
+        html = &#39;&amp;#&#39; + glyph + &#39;;&#39;;
+        if (glyphFontFamily) {
+            html = &#39;&lt;span style=&quot;font-family:&#39; + glyphFontFamily + &#39;&quot;&gt;&#39; + html + &#39;&lt;/span&gt;&#39;;
+        }
+
+        return html;
+    },
+
+<span id='Ext-ux-dashboard-GoogleRssView-method-beforeDestroy'>    // @private
+</span>    beforeDestroy: function () {
+        Ext.destroy(this.tip);
+
+        this.callParent();
+    }
+});
+</pre>
+</body>
+</html>

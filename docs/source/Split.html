@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-button-Split'>/**
+</span> * A split button that provides a built-in dropdown arrow that can fire an event separately from the default click event
+ * of the button. Typically this would be used to display a dropdown menu that provides additional options to the
+ * primary button action, but any custom handler can provide the arrowclick implementation.  Example usage:
+ *
+ *     @example
+ *     // display a dropdown menu:
+ *     Ext.create(&#39;Ext.button.Split&#39;, {
+ *         renderTo: Ext.getBody(),
+ *         text: &#39;Options&#39;,
+ *         // handle a click on the button itself
+ *         handler: function() {
+ *             alert(&quot;The button was clicked&quot;);
+ *         },
+ *         menu: new Ext.menu.Menu({
+ *             items: [
+ *                 // these will render as dropdown menu items when the arrow is clicked:
+ *                 {text: &#39;Item 1&#39;, handler: function(){ alert(&quot;Item 1 clicked&quot;); }},
+ *                 {text: &#39;Item 2&#39;, handler: function(){ alert(&quot;Item 2 clicked&quot;); }}
+ *             ]
+ *         })
+ *     });
+ *
+ * Instead of showing a menu, you can provide any type of custom functionality you want when the dropdown
+ * arrow is clicked:
+ *
+ *     Ext.create(&#39;Ext.button.Split&#39;, {
+ *         renderTo: &#39;button-ct&#39;,
+ *         text: &#39;Options&#39;,
+ *         handler: optionsHandler,
+ *         arrowHandler: myCustomHandler
+ *     });
+ *
+ */
+Ext.define(&#39;Ext.button.Split&#39;, {
+
+    /* Begin Definitions */
+    alias: &#39;widget.splitbutton&#39;,
+
+    extend: &#39;Ext.button.Button&#39;,
+    alternateClassName: &#39;Ext.SplitButton&#39;,
+<span id='Ext-button-Split-property-isSplitButton'>    /* End Definitions */
+</span>
+    isSplitButton: true,
+    
+<span id='Ext-button-Split-cfg-arrowHandler'>    /**
+</span>     * @cfg {Function} arrowHandler
+     * A function called when the arrow button is clicked (can be used instead of click event)
+     * @cfg {Ext.button.Split} arrowHandler.this
+     * @cfg {Event} arrowHandler.e The click event.
+     */
+<span id='Ext-button-Split-cfg-arrowTooltip'>    /**
+</span>     * @cfg {String} arrowTooltip
+     * The title attribute of the arrow.
+     */
+
+<span id='Ext-button-Split-cfg-arrowCls'>    // @private
+</span>    arrowCls      : &#39;split&#39;,
+<span id='Ext-button-Split-property-split'>    split         : true,
+</span>
+<span id='Ext-button-Split-event-arrowclick'>    /**
+</span>     * @event arrowclick
+     * Fires when this button&#39;s arrow is clicked.
+     * @param {Ext.button.Split} this
+     * @param {Event} e The click event.
+     */
+
+<span id='Ext-button-Split-method-setArrowHandler'>    /**
+</span>     * Sets this button&#39;s arrow click handler.
+     * @param {Function} handler The function to call when the arrow is clicked.
+     * @param {Object} scope (optional) Scope for the function passed above.
+     */
+    setArrowHandler : function(handler, scope){
+        this.arrowHandler = handler;
+        this.scope = scope;
+    },
+
+<span id='Ext-button-Split-method-onClick'>    // @private
+</span>    onClick : function(e) {
+        var me = this;
+
+        me.doPreventDefault(e);
+        if (!me.disabled) {
+            if (me.isWithinTrigger(e)) {
+                // Force prevent default here, if we click on the arrow part
+                // we want to trigger the menu, not any link if we have it
+                e.preventDefault();
+                me.maybeShowMenu(e);
+                me.fireEvent(&quot;arrowclick&quot;, me, e);
+                if (me.arrowHandler) {
+                    me.arrowHandler.call(me.scope || me, me, e);
+                }
+            } else {
+                me.doToggle();
+                me.fireHandler(e);
+            }
+        }
+    }
+});</pre>
+</body>
+</html>

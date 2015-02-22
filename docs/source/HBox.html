@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-container-HBox'>/**
+</span> * A layout that arranges items horizontally across a Container. This layout optionally divides available horizontal
+ * space between child items containing a numeric `flex` configuration.
+ *
+ * This layout may also be used to set the heights of child items by configuring it with the {@link #align} option.
+ *
+ *     @example
+ *     Ext.create(&#39;Ext.Panel&#39;, {
+ *         width: 500,
+ *         height: 300,
+ *         title: &quot;HBoxLayout Panel&quot;,
+ *         layout: {
+ *             type: &#39;hbox&#39;,
+ *             align: &#39;stretch&#39;
+ *         },
+ *         renderTo: document.body,
+ *         items: [{
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel One&#39;,
+ *             flex: 2
+ *         },{
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel Two&#39;,
+ *             flex: 1
+ *         },{
+ *             xtype: &#39;panel&#39;,
+ *             title: &#39;Inner Panel Three&#39;,
+ *             flex: 1
+ *         }]
+ *     });
+ */
+Ext.define(&#39;Ext.layout.container.HBox&#39;, {
+    extend: &#39;Ext.layout.container.Box&#39;,
+
+    alias: &#39;layout.hbox&#39;,
+
+    alternateClassName: &#39;Ext.layout.HBoxLayout&#39;,
+
+<span id='Ext-layout-container-HBox-property-type'>    type: &#39;hbox&#39;,
+</span>
+<span id='Ext-layout-container-HBox-cfg-vertical'>    vertical: false
+</span>});
+</pre>
+</body>
+</html>

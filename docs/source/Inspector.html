@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.app.bindinspector.Inspector&#39;, {
+    extend: &#39;Ext.window.Window&#39;,
+
+    requires: [
+        &#39;Ext.app.bindinspector.Container&#39;,
+        &#39;Ext.layout.container.Fit&#39;,
+        &#39;Ext.tip.QuickTipManager&#39;
+    ],
+
+    title: &#39;Bind Inspector&#39;,
+
+    layout: &#39;fit&#39;,
+
+    autoShow: true,
+    maximized: true,
+    maximizable: true,
+    width: 960,
+    height: 575,
+
+    initComponent: function() {
+        var snapshot = (new Ext.app.bindinspector.Environment()).captureSnapshot(),
+            env = new Ext.app.bindinspector.Environment();
+            
+        env.unpackSnapshot(snapshot);
+
+        this.items = {
+            xtype: &#39;bindinspector-container&#39;,
+            env: env
+        };
+        this.callParent();
+    },
+
+    afterRender: function() {
+        this.callParent(arguments);
+        Ext.tip.QuickTipManager.init();
+    }
+});
+</pre>
+</body>
+</html>

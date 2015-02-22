@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.app.bindinspector.ComponentList&#39;, {
+    alias: &#39;widget.bindinspector-componentlist&#39;,
+    extend: &#39;Ext.tree.Panel&#39;,
+
+    requires: [
+        &#39;Ext.form.field.Text&#39;
+    ],
+    
+    rootVisible: false,
+    title: &#39;Component Tree&#39;,
+    hideHeaders: true,
+
+    bindingsIconCls: Ext.baseCSSPrefix + &#39;bindings-icon&#39;,
+    vmIconCls: Ext.baseCSSPrefix + &#39;vm-icon&#39;,
+    missingDataCls: Ext.baseCSSPrefix + &#39;bindinspector-missing-data&#39;,
+    filterVisibleCls: Ext.baseCSSPrefix + &#39;bindinspector-filter-visible&#39;,
+    lastItemCls: Ext.baseCSSPrefix + &#39;bindinspector-last-item&#39;,
+
+    bindingsIcon: &#39;☍&#39;,
+    vmIcon: &#39;☶&#39;,
+    
+    initComponent: function() {
+        var me = this,
+            nodes = [];
+
+        me.viewConfig = {
+            toggleOnDblClick: false,
+            getRowClass: function (record, index, rowParams, store) {
+                var cls = [];
+                // decoration for items found when filtering
+                if (record.get(&#39;filtervisible&#39;)) {
+                    cls.push(me.filterVisibleCls);
+                }
+                // decoration for items with no associated data
+                if (record.get(&#39;sansData&#39;)) {
+                    cls.push(me.missingDataCls);
+                }
+                // decoration for the last item in the tree (adds a shadow for modern browsers)
+                if (index === store.getCount() - 1) {
+                    cls.push(me.lastItemCls);
+                }
+                return cls.join(&#39; &#39;);
+            }
+        };
+
+        // build the component node hierarchy
+        Ext.Array.forEach(me.components, function(comp) {
+            nodes.push(me.buildNode(comp));
+        }, me);
+
+        me.store = {
+            model: me.Model,
+            root: {
+                expanded: true,
+                children: nodes
+            }
+        };
+
+        me.columns = [{
+            // used by the Container.onVMSearchClick() method when showing the source VMs for a given data point
+            itemId: &#39;srcVMIndicator&#39;,
+            width: 40,
+            hidden: true,
+            renderer: me.srcVMIndicator,
+            scope: me
+        }, {
+            xtype: &#39;treecolumn&#39;,
+            dataIndex: &#39;text&#39;,
+            flex: 1
+        }];
+
+        me.dockedItems = [{
+            // the toolbar for searching within the component list
+            xtype: &#39;toolbar&#39;,
+            itemId: &#39;queryFieldTb&#39;,
+            dock: &#39;top&#39;,
+            items: [{
+                xtype: &#39;textfield&#39;,
+                reference: &#39;queryField&#39;,
+                itemId: &#39;queryField&#39;,
+                emptyText: &#39;simple search by reference / ID or use a component query...&#39;,
+                flex: 1,
+                triggers: {
+                    clear: {
+                        cls: Ext.baseCSSPrefix + &#39;form-clear-trigger&#39;,
+                        handler: function(field) {
+                            var tree = field.up(&#39;treepanel&#39;),
+                                store = tree.store;
+
+                            field.reset();
+                            tree.clearComponentFilter();
+                            field.focus();
+                        }
+                    }
+                },
+                listeners: {
+                    change: {
+                        fn: me.filterComponentTree,
+                        buffer: 250,
+                        scope: me
+                    },
+                    afterrender: {
+                        fn: function (field) {
+                            var tbEl = field.up(&#39;toolbar&#39;).getEl();
+
+                            // set up the toolip for the component list filter field
+                            field.mon(tbEl, &#39;mouseenter&#39;, function () {
+                                var tip = me.bindingsTip,
+                                    showAt, x, y;
+
+                                tip.stopAnimation();
+                                tip.update(&#39;&lt;b&gt;Simple Search&lt;/b&gt;&lt;br&gt;Enter the string matching the reference or ID of the target component&lt;hr&gt;&lt;b&gt;Component Query&lt;/b&gt;&lt;br&gt;Enter a component query string to find any items matching the query&#39;);
+                                tip.setTarget(tbEl);
+                                tip.show();
+                                x = tip.getX();
+                                y = tip.getY();
+                                showAt = tip.getAlignToXY(tbEl, &#39;l-r&#39;);
+                                tip.animate({
+                                    from: {
+                                        opacity: 0,
+                                        x: showAt[0] + 20,
+                                        y: showAt[1]
+                                    },
+                                    to: {
+                                        opacity: 1,
+                                        x: showAt[0] + 10,
+                                        y: showAt[1]
+                                    }
+                                });
+                            });
+                        },
+                        scope: me
+                    }
+                }
+            }]
+        }, {
+            // toolbar used by Container.onVMSearchClick()
+            // is shown when the results in the Component List are filtered by the ViewModelDetail&#39;s searched data point
+            xtype: &#39;toolbar&#39;,
+            cls: Ext.baseCSSPrefix + &#39;vm-results-tb&#39;,
+            itemId: &#39;vmQueryResultsTb&#39;,
+            hidden: true,
+            dock: &#39;top&#39;,
+            defaultButtonUI: &#39;default&#39;,
+            items: [&#39;-&gt;&#39;, {
+                text: &#39;Clear VM Filter&#39;,
+                // restores the original filter toolbar
+                handler: function () {
+                    console.log(this.up(&#39;#vmQueryResultsTb&#39;));
+                    var tb = this.up(&#39;#vmQueryResultsTb&#39;),
+                        componentList = tb.up(&#39;bindinspector-componentlist&#39;),
+                        queryTb = componentList.down(&#39;#queryFieldTb&#39;),
+                        queryField = queryTb.down(&#39;#queryField&#39;);
+
+                    tb.hide();
+                    queryTb.show();
+                    componentList.clearVMSearchIndicators();
+                    queryField.setValue(queryField.lastValue);
+                    componentList.filterComponentTree(null, queryField.lastValue);
+                }
+            }]
+        }];
+
+        me.callParent();
+        me.getView().on(&#39;itemdblclick&#39;, me.onItemDblclick, me);
+        me.on(&#39;select&#39;, me.onItemSelect, me);
+
+        // a quick-view tip to show the bindings for a given component
+        me.bindingsTip = Ext.create(&#39;Ext.tip.ToolTip&#39;, {
+            renderTo: document.body,
+            anchor: &#39;left&#39;,
+            cls: Ext.baseCSSPrefix + &#39;componentlist-tip&#39;,
+            bodyPadding: 12
+        });
+
+        // manually show the bindings tip on itemmouseenter
+        me.getView().on(&#39;itemmouseenter&#39;, me.showBindingsTip, me);
+    },
+
+    // the source VM indicators column which is shown during the Container.onVMSearchClick() call is then hidden
+    // between VM drill down searches
+    clearVMSearchIndicators: function () {
+        var indicatedVM = this.indicatedVM;
+
+        Ext.suspendLayouts();
+        if (indicatedVM) {
+            Ext.Array.forEach(indicatedVM, function (rec) {
+                rec.set(&#39;isSrcVM&#39;, false);
+            });
+        }
+        this.down(&#39;#srcVMIndicator&#39;).hide();
+        Ext.resumeLayouts(true);
+
+        this.indicatedVM = null;
+    },
+
+    // renderer for the source VM indicator column
+    srcVMIndicator: function (v, meta, rec) {
+        var refVM = rec.get(&#39;isSrcVM&#39;),
+            tip = &#39;&#39;,
+            vmDetail, firstTierRec, firstTierName, targetRec;
+
+        if (refVM) {
+            vmDetail = this.up(&#39;bindinspector-container&#39;).down(&#39;bindinspector-viewmodeldetail&#39;);
+            firstTierRec = vmDetail.getFirstTierRec(refVM);
+            firstTierName = firstTierRec.get(&#39;name&#39;);
+            if (firstTierRec !== refVM) {
+                tip += &#39;Root data node: &amp;nbsp;&lt;span class=\&#39;&#39; + Ext.baseCSSPrefix + &#39;binding-tip-descriptor\&#39;&gt;&#39; + firstTierName + &#39;&lt;/span&gt;&lt;hr&gt;&#39;;
+            }
+
+            targetRec = firstTierRec === refVM ? firstTierRec : refVM;
+            tip += targetRec.get(&#39;name&#39;) + &#39;:&#39;;
+            tip += &#39;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;;
+            tip += &#39;&lt;span class=\&#39;&#39; + Ext.baseCSSPrefix + &#39;binding-tip-value\&#39;&gt;&#39; + Ext.app.bindinspector.Util.valueRenderer(targetRec.get(&#39;value&#39;)) + &#39;&lt;/span&gt;&#39;;
+            meta.tdCls = Ext.baseCSSPrefix + &#39;bindindicator-vm-src&#39;;
+            meta.tdAttr = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&#39; + tip + &#39;&quot;&#39;;
+        }
+    },
+
+    // when the ComponentList is destroyed the stand-alone QuickTip needs to also be destroyed
+    onDestroy: function () {
+        this.bindingsTip.destroy();
+        this.callParent();
+    },
+
+    // when a nodeInterface / row is moused over show the bindings tooltip which will detail the specs &gt; output value from the bindings on the component
+    showBindingsTip: function (view, record, item, index, e) {
+        var me = this,
+            tip = me.bindingsTip,
+            sansData = record.get(&#39;sansData&#39;),
+            bindings, bindingText;
+
+        tip.stopAnimation();
+        if (record.get(&#39;hasBindings&#39;)) {
+            bindings = me.ownerCt.env.getCmp(record.get(&#39;id&#39;)).bindings;
+            bindingText = [];
+
+            // build the bindings markup for the tip
+            Ext.Object.each(bindings, function (key, val, o) {
+                var kv = key + &#39;: &#39; + &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;binding-tip-descriptor&quot;&gt;&#39; + val.descriptor + &#39;&lt;/span&gt;&lt;br&gt;&#39;,
+                    bindValue = val.value,
+                    v;
+
+                if (Ext.isString(bindValue)) {
+                    v = bindValue;
+                } else if (Ext.isObject(bindValue)) {
+                    if (bindValue.isStore === true) {
+                        v = &#39;Store {&#39; + bindValue.entityName + &#39;}&#39;;
+                    } else if (bindValue.isModel === true) {
+                        v = &#39;Model {&#39; + bindValue.entityName + &#39;}&#39;;
+                    }
+                }
+                kv += &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;binding-tip-value&quot;&gt;&#39; + v + &#39;&lt;/span&gt;&#39;;
+                bindingText.push(kv);
+            });
+
+            bindingText = bindingText.join(&#39;&lt;hr&gt;&#39;);
+            if (sansData) {
+                bindingText += &#39;&lt;hr&gt;&#39;;
+                Ext.Array.forEach(sansData, function (missing) {
+                    bindingText += &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;binding-missing-data&quot;&gt;Missing data: &#39; + missing + &#39;&lt;/div&gt;&#39;;
+                });
+            }
+            tip.update(bindingText);
+            tip.setTarget(item);
+            tip.show();
+            tip.alignTo(item, &#39;l-r&#39;, [20, 0]);
+            tip.animate({
+                from: {
+                    opacity: 0
+                },
+                to: {
+                    opacity: 1,
+                    x: tip.getX() - 10
+                }
+            });
+        }
+    },
+
+    // filter for the component list (tree)
+    filterComponentTree: function (field, val) {
+        var tree = this,
+            field = tree.down(&#39;#queryField&#39;),
+            newVal = val || field.getValue(),
+            store = tree.store,
+            queryRe = /[\s&gt;\[\]=()^&#39;&quot;~$@*:+#,]/g,
+            valIsArray = Ext.isArray(newVal),
+            ids = valIsArray ? newVal : [],
+            components = [],
+            isQuery, len, i;
+
+        if (Ext.isString(newVal)) {
+            isQuery = queryRe.test(Ext.String.trim(newVal));
+        }
+
+        if (newVal.length &gt; 0) {
+            tree.filteredComponents = [];
+
+            // if newVal matches the queryRe regex attempt the lookup using Ext.ComponentQuery
+            if (isQuery) {
+                try
+                {
+                    components = Ext.ComponentQuery.query(newVal);
+                } catch (e) {}
+                
+                len = components.length;
+
+                for (i = 0; i &lt; len; i++) {
+                    ids.push(components[i].id);
+                }
+            }
+            
+            store.suspendEvents();
+            store.filter({
+                filterFn: function (node) {
+                    var children = node.childNodes,
+                        length = children &amp;&amp; children.length,
+                        visible = false,
+                        prop, j;
+
+                    if (isQuery || valIsArray) {
+                        visible = Ext.Array.contains(ids, node.get(&#39;id&#39;));
+                    } else {
+                        visible = node.get(&#39;text&#39;).indexOf(newVal) &gt; -1;
+                    }
+                    node.set(&#39;filtervisible&#39;, visible);
+
+                    if (visible) {
+                        tree.filteredComponents.push(node);
+                    }
+
+                    // check the child nodes to see if they are &#39;visible&#39; and if so then show the parent node, too
+                    for (j = 0; j &lt; length; j++) {
+                        if (children[j].get(&#39;visible&#39;)) {
+                            visible = true;
+                        }
+                    }
+                    return visible;
+                },
+                id: &#39;queryFilter&#39;
+            });
+            store.resumeEvents();
+            tree.getView().refresh();
+        } else {
+            tree.clearComponentFilter();
+        }
+    },
+
+    // method to clear the filter from the component list (tree)
+    clearComponentFilter: function () {
+        var tree = this,
+            store = tree.store,
+            filtered = tree.filteredComponents || [],
+            len = filtered.length,
+            i = 0;
+
+        for (; i &lt; len; i++) {
+            filtered[i].set(&#39;filtervisible&#39;, false);
+        }
+        store.clearFilter();
+    },
+    
+    // constructs the tree node for the given component
+    buildNode: function(comp) {
+        var me = this,
+            ownerCt = me.getRefOwner(),
+            childItems = comp.items,
+            viewModel = comp.viewModel,
+            bindings = comp.bindings,
+            hasBindings = !!comp.bindings,
+            suffix = [],
+            sansData = [],
+            missing = {},
+            binding, len, i, o, child, ref, key, bindData;
+
+        if (viewModel) {
+            suffix.push(&#39;&lt;span class=&quot;&#39; + me.vmIconCls + &#39;&quot;&gt;&#39; + me.vmIcon + &#39;&lt;/span&gt;&#39;);
+            ownerCt.buildVMDataMap(viewModel);
+        }
+        if (hasBindings) {
+            suffix.push(&#39;&lt;span class=&quot;&#39; + me.bindingsIconCls + &#39;&quot;&gt;&#39; + me.bindingsIcon + &#39;&lt;/span&gt;&#39;);
+
+            for (key in bindings) {
+                binding = bindings[key];
+                if (binding.descriptor &amp;&amp; Ext.isEmpty(binding.value)) {
+                    sansData.push(missing[key] = binding.descriptor);
+                }
+            }
+
+            bindData = comp.bindData = Ext.app.bindinspector.Util.buildBindData(bindings);
+        }
+
+        if (sansData.length === 0) {
+            sansData = undefined;
+        }
+        
+        ref = comp.reference ? &#39;&lt;b&gt;[&#39; + comp.reference + &#39;]&lt;/b&gt; &amp;bull; &#39; : &#39;&#39;;
+
+        o = {
+            id: comp.id,
+            text: ref + comp.id + (suffix.length ? (&#39; &#39; + suffix.join(&#39; &#39;)) : &#39;&#39;),
+            hasViewModel: !!viewModel,
+            hasBindings: hasBindings,
+            hasDeepBindings: hasBindings,
+            reference: comp.reference,
+            sansData: sansData,
+            bindData: bindData,
+            children: []
+        };
+        
+        if (childItems) {
+            for (i = 0, len = childItems.length; i &lt; len; ++i) {
+                child = me.buildNode(childItems[i]);
+                o.hasDeepBindings = o.hasDeepBindings || child.hasDeepBindings;
+                if (child.hasDeepBindings) {
+                    o.children.push(child);
+                }
+            }
+        }
+        
+        if (o.children.length) {
+            o.expanded = true;
+            o.leaf = false;
+        } else {
+            o.leaf = true;
+        }
+        
+        return o;
+    },
+    
+    // on item dblclick fire the &#39;componentdblclick&#39; event for the bindinspector-container to listen for
+    onItemDblclick: function(view, rec) {
+        this.fireEvent(&#39;componentdblclick&#39;, this, rec);
+    },
+
+    // on item select fire the &#39;componentselect&#39; event for the bindinspector-container to listen for
+    onItemSelect: function (selModel, rec) {
+        var node = this.getView().getNode(rec);
+        this.fireEvent(&#39;componentselect&#39;, this, rec, node);
+    }
+}, function() {
+    this.prototype.Model = Ext.define(null, {
+        extend: &#39;Ext.data.TreeModel&#39;,
+        fields: [&#39;hasViewModel&#39;, &#39;hasBindings&#39;, &#39;reference&#39;, &#39;hasDeepBindings&#39;, &#39;reference&#39;, &#39;sansData&#39;, &#39;bindData&#39;, &#39;isSrcVM&#39;]
+    });
+});</pre>
+</body>
+</html>

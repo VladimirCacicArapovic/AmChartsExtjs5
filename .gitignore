@@ -51,3 +51,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+ChartSystem
+ux/
+ext/

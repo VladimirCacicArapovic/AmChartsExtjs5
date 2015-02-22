@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*!
+* Ext JS Library
+* Copyright(c) 2006-2014 Sencha Inc.
+* licensing@sencha.com
+* http://www.sencha.com/license
+*/
+
+// From code originally written by David Davis (http://www.sencha.com/blog/html5-video-canvas-and-ext-js/)
+
+/* -NOTICE-
+ * For HTML5 video to work, your server must
+ * send the right content type, for more info see:
+ * http://developer.mozilla.org/En/HTML/Element/Video
+ */
+
+Ext.define(&#39;Ext.ux.desktop.Video&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+
+    alias: &#39;widget.video&#39;,
+    layout: &#39;fit&#39;,
+    autoplay: false,
+    controls: true,
+    bodyStyle: &#39;background-color:#000;color:#fff&#39;,
+    html: &#39;&#39;,
+    tpl: [
+        &#39;&lt;video id=&quot;{id}-video&quot; autoPlay=&quot;{autoplay}&quot; controls=&quot;{controls}&quot; poster=&quot;{poster}&quot; start=&quot;{start}&quot; loopstart=&quot;{loopstart}&quot; loopend=&quot;{loopend}&quot; autobuffer=&quot;{autobuffer}&quot; loop=&quot;{loop}&quot; style=&quot;width:100%;height:100%&quot;&gt;&#39;,
+            &#39;&lt;tpl for=&quot;src&quot;&gt;&#39;,
+                &#39;&lt;source src=&quot;{src}&quot; type=&quot;{type}&quot;/&gt;&#39;,
+            &#39;&lt;/tpl&gt;&#39;,
+            &#39;{html}&#39;,
+        &#39;&lt;/video&gt;&#39;
+    ],
+
+    initComponent: function () {
+
+        var me = this,
+            fallback,
+            size,
+            cfg,
+            el;
+
+        if (me.fallbackHTML) {
+            fallback = me.fallbackHTML;
+        } else {
+            fallback = &quot;Your browser does not support HTML5 Video. &quot;;
+
+            if (Ext.isChrome) {
+                fallback += &#39;Upgrade Chrome.&#39;;
+            } else if (Ext.isGecko) {
+                fallback += &#39;Upgrade to Firefox 3.5 or newer.&#39;;
+            } else {
+                var chrome = &#39;&lt;a href=&quot;http://www.google.com/chrome&quot;&gt;Chrome&lt;/a&gt;&#39;;
+                fallback += &#39;Please try &lt;a href=&quot;http://www.mozilla.com&quot;&gt;Firefox&lt;/a&gt;&#39;;
+
+                if (Ext.isIE) {
+                    fallback += &#39;, &#39; + chrome +
+                        &#39; or &lt;a href=&quot;http://www.apple.com/safari/&quot;&gt;Safari&lt;/a&gt;.&#39;;
+                } else {
+                    fallback += &#39; or &#39; + chrome + &#39;.&#39;;
+                }
+            }
+        }
+        me.fallbackHTML = fallback;
+
+        cfg = me.data = Ext.copyTo({
+            tag   : &#39;video&#39;,
+            html: fallback
+        },
+        me, &#39;id,poster,start,loopstart,loopend,playcount,autobuffer,loop&#39;);
+
+        // just having the params exist enables them
+        if (me.autoplay) {
+            cfg.autoplay = 1;
+        }
+        if (me.controls) {
+            cfg.controls = 1;
+        }
+
+        // handle multiple sources
+        if (Ext.isArray(me.src)) {
+            cfg.src  = me.src;
+        } else {
+            cfg.src  = [ {src: me.src} ];
+        }
+        me.callParent();
+    },
+
+    afterRender: function() {
+        var me = this;
+        me.callParent();
+        me.video = me.body.getById(me.id + &#39;-video&#39;);
+        el = me.video.dom;
+        me.supported = (el &amp;&amp; el.tagName.toLowerCase() == &#39;video&#39;);
+        if (me.supported) {
+            me.video.on(&#39;error&#39;, me.onVideoError, me);
+        }
+    },
+    
+    getFallback: function() {
+        return &#39;&lt;h1 style=&quot;background-color:#ff4f4f;padding: 10px;&quot;&gt;&#39; + this.fallbackHTML + &#39;&lt;/h1&gt;&#39;;
+    },
+
+    onVideoError: function() {
+        var me = this;
+
+        me.video.remove();
+        me.supported = false;
+        me.body.createChild(me.getFallback());
+    },
+
+    onDestroy: function () {
+        var me = this;
+
+        var video = me.video;
+        if (me.supported &amp;&amp; video) {
+            var videoDom = video.dom;
+            if (videoDom &amp;&amp; videoDom.pause) {
+                videoDom.pause();
+            }
+            video.remove();
+            me.video = null;
+        }
+
+        me.callParent();
+    }
+});</pre>
+</body>
+</html>

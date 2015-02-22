@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.app.bindinspector.Container&#39;, {
+    extend: &#39;Ext.container.Container&#39;,
+    alias: &#39;widget.bindinspector-container&#39;,
+    requires: [
+        &#39;Ext.layout.container.Border&#39;,
+        &#39;Ext.tab.Panel&#39;,
+        &#39;Ext.app.bindinspector.ComponentDetail&#39;,
+        &#39;Ext.app.bindinspector.ComponentList&#39;,
+        &#39;Ext.app.bindinspector.Environment&#39;,
+        &#39;Ext.app.bindinspector.Util&#39;,
+        &#39;Ext.app.bindinspector.ViewModelDetail&#39;,
+        &#39;Ext.app.bindinspector.noconflict.BaseModel&#39;
+    ],
+
+    isBindInspector: true,
+    referenceHolder: true,
+    
+    layout: &#39;border&#39;,
+    
+    cls: Ext.baseCSSPrefix + &#39;bindinspector-container&#39;,
+    //pickerCls: Ext.baseCSSPrefix + &#39;bindinspector-target-menu&#39;,
+    //pickerPreviewBindingsCls: Ext.baseCSSPrefix + &#39;bindinspector-preview-bind&#39;,
+    //pickerOpenBindingsCls: Ext.baseCSSPrefix + &#39;bindinspector-open-bind&#39;,
+    //pickerPreviewVMCls: Ext.baseCSSPrefix + &#39;bindinspector-preview-vm&#39;,
+    //pickerOpenVMCls: Ext.baseCSSPrefix + &#39;bindinspector-open-vm&#39;,
+
+    // the default view for the bindings preview tab for:
+    // 1)  when a component hasn&#39;t been selected
+    // 2)  when a component is clicked, but has no bindings
+    componentPreviewDefault: {
+        xtype: &#39;container&#39;,
+        cls: Ext.baseCSSPrefix + &#39;bindinspector-prev-default&#39;,
+        padding: 20,
+        layout: {
+            type: &#39;hbox&#39;,
+            align: &#39;middle&#39;,
+            pack: &#39;center&#39;
+        },
+        items: [{
+            xtype: &#39;component&#39;,
+            flex: 1,
+            html: &#39;Select a component with bindings from the ComponentList to view the bindings details along with the component\&#39;s inherited ViewModel&#39;
+        }]
+    },
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.data.schema.Schema.get(&#39;Ext_app_bindinspector&#39;).clear();
+        me.items = [{
+            xtype: &#39;bindinspector-componentlist&#39;,
+            reference: &#39;componentList&#39;,
+            region: &#39;west&#39;,
+            width: 400,
+            split: true,
+            collapsible: true,
+            components: me.env.rootComponents,
+            listeners: {
+                scope: me,
+                componentdblclick: me.onComponentDblclick,
+                componentselect: me.onComponentSelect
+            }
+        }, {
+            xtype: &#39;tabpanel&#39;,
+            region: &#39;center&#39;,
+            reference: &#39;tabs&#39;,
+            items: [{
+                title: &#39;Preview&#39;,
+                reference: &#39;preview&#39;,
+                layout: &#39;fit&#39;,
+                items: [me.componentPreviewDefault]
+            }],
+            listeners: {
+                add: function () {
+                    this.getTabBar().setVisible(this.items.getCount() &gt; 1);
+                },
+                remove: function () {
+                    this.getTabBar().setVisible(this.items.getCount() &gt; 1);
+                }
+            }
+        }];
+        me.callParent();
+
+        me.on(&#39;vmSearchClick&#39;, me.onVMSearchClick, me);
+    },
+
+    // When the search icon in the ViewModelDetail is clicked sort the items in the ComponentList panel to show
+    // 1)  The viewmodels that have the root data node for the row clicked
+    // 2)  All components with bindings that will consume the selected data point
+    onVMSearchClick: function (rec) {
+        var componentList = this.lookupReference(&#39;componentList&#39;),
+            store = componentList.getStore(),
+            ownerVMs = rec.get(&#39;ownerVMs&#39;),
+            sourceVMs = [],
+            bindCount = rec.get(&#39;bindCount&#39;),
+            names = [],
+            consumerNodes = [],
+            query = [],
+            source, descriptor;
+
+        // THE INDICATING OF THE SOURCE VMS
+        store.suspendEvents();
+        componentList.clearVMSearchIndicators();
+        Ext.Array.forEach(ownerVMs, function (vm) {
+            source = store.getById(vm.view);
+            source.set(&#39;isSrcVM&#39;, rec);
+            sourceVMs.push(source);
+        });
+        store.resumeEvents();
+        componentList.getView().refresh();
+
+        // cache the list of source VMs for the given root data point
+        // used by ComponentList.clearVMSearchIndicators() to clear the selected indicators when clearing search results
+        componentList.indicatedVM = sourceVMs;
+
+        // THE INDICATING OF THE CONSUMER COMPONENTS
+        if (bindCount &gt; 0) {
+            // find the descriptor path for the selected row
+            rec.bubble(function (node) {
+                var nodeName = node.get(&#39;name&#39;);
+                if (nodeName) {
+                    names.push(nodeName);
+                }
+            });
+            // and save as a &#39;.&#39; separated string of node values
+            descriptor = names.reverse().join(&#39;.&#39;);
+
+            // iterate over the component tree and find components whose bindings match the descriptor for the selected row
+            componentList.getStore().getRootNode().cascadeBy(function (node) {
+                if (node.get(&#39;hasBindings&#39;)) {
+                    Ext.Array.forEach(node.get(&#39;bindData&#39;), function (binding) {
+                        var tokenStr = [];
+                        if (binding.tokens) {
+                            Ext.Array.forEach(binding.tokens, function (token) {
+                                if (Ext.isArray(token)) {
+                                    Ext.Array.forEach(token, function (t) {
+                                        tokenStr.push(t);
+                                    })
+                                } else {
+                                    tokenStr.push(token);
+                                }
+                            });
+                        }
+                        if (tokenStr.join(&#39;.&#39;) === descriptor) {
+                            consumerNodes.push(node);
+                        }
+                    });
+                }
+            });
+        }
+
+        // collect into an array all consuming components and source VMs for use in the componentlist filter in the next step
+        Ext.Array.forEach(consumerNodes.concat(sourceVMs), function (node) {
+            query.push(node.getId());
+        });
+        
+        // filter to find the matching binding consumer components and source VMs
+        componentList.expand();
+        componentList.filterComponentTree(null, query);
+
+        // pull the filter styling off of any nodes that are VM sources, but not a binding match
+        Ext.Array.forEach(sourceVMs, function (src) {
+            if (!Ext.Array.contains(consumerNodes)) {
+                src.set(&#39;filtervisible&#39;, false);
+            }
+        });
+        componentList.down(&#39;#srcVMIndicator&#39;).show();   // show the indicator column used to show which VMs are source VMs
+        componentList.down(&#39;#queryFieldTb&#39;).hide();     // hide the normal filter toolbar
+        componentList.down(&#39;#vmQueryResultsTb&#39;).show(); // and show the one that indicates that it&#39;s filtered by VM search
+    },
+
+    // on component select review the component in the dedicated preview tab
+    onComponentSelect: function (tree, rec, node) {
+        var me = this,
+            id = rec.getId(),
+            preview = me.lookupReference(&#39;preview&#39;);
+
+        if (preview.referringID !== id) {
+            Ext.suspendLayouts();
+            preview.removeAll();
+            preview.add({
+                xtype: &#39;bindinspector-componentdetail&#39;,
+                env: me.env,
+                component: me.env.getCmp(id)
+            });
+            Ext.resumeLayouts(true);
+            preview.referringID = id;
+        }
+
+        preview.show();
+    },
+
+    // on component dblclick (or clicking the &#39;open in own tab button&#39;) open the component&#39;s bindings view in its own tab
+    onComponentDblclick: function(tree, rec, node)  {
+        var id = rec.id,
+            tabId = &#39;bindtab-&#39; + id,
+            tabs = this.lookupReference(&#39;tabs&#39;),
+            tab = tabs.items.get(tabId),
+            component, reference;
+        
+        if (!tab) {
+            component = this.env.getCmp(id);
+            reference = component.reference;
+            tab = tabs.add({
+                xtype: &#39;bindinspector-componentdetail&#39;,
+                env: this.env,
+                itemId: tabId,
+                title: reference ? &#39;[&#39; + reference + &#39;] &#39; + id : id,
+                closable: true,
+                component: component
+            });
+        }
+        
+        tabs.setActiveTab(tab);
+    },
+
+    // loop over the view models and build a reference that shows where each
+    // data point originates
+    buildVMDataMap: function (vm) {
+        var env = this.env,
+            currVM = vm,
+            dataMap = vm.dataMap,
+            viewModels = [],
+            data, isDirect;
+
+        // if the datamap has not yet been created for this view model build it
+        if (!dataMap) {
+            dataMap = vm.dataMap = {};
+
+            // collect up all ancestor view models which this view model will inherit from
+            while (currVM) {
+                viewModels.push(currVM);
+                currVM = env.getVM(currVM.parent);
+            }
+
+            // loop through and see if each data point is found on this view model or an ancestor
+            // and catalog all viewmodels where this data point is found (to how overlapping keys)
+            Ext.Array.forEach(viewModels, function (item) {
+                var key;
+                data = item.data;
+                if (data &amp;&amp; Ext.isObject(data)) {
+                    for (key in data) {
+                        isDirect = data.hasOwnProperty(key);
+                        if (!dataMap[key]) {
+                            dataMap[key] = {
+                                isDirect: isDirect
+                            };
+                        }
+                        dataMap[key].ownerVMs = dataMap[key].ownerVMs || [];
+                        if (isDirect) {
+                            dataMap[key].ownerVMs.push(item);
+                        }
+                    }
+                }
+            });
+        }
+
+        return vm;
+    }
+});
+</pre>
+</body>
+</html>

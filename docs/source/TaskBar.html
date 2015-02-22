@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*!
+ * Ext JS Library
+ * Copyright(c) 2006-2014 Sencha Inc.
+ * licensing@sencha.com
+ * http://www.sencha.com/license
+ */
+
+<span id='Ext-ux-desktop-TaskBar'>/**
+</span> * @class Ext.ux.desktop.TaskBar
+ * @extends Ext.toolbar.Toolbar
+ */
+Ext.define(&#39;Ext.ux.desktop.TaskBar&#39;, {
+    // This must be a toolbar. we rely on acquired toolbar classes and inherited toolbar methods for our
+    // child items to instantiate and render correctly.
+    extend: &#39;Ext.toolbar.Toolbar&#39;,
+
+    requires: [
+        &#39;Ext.button.Button&#39;,
+        &#39;Ext.resizer.Splitter&#39;,
+        &#39;Ext.menu.Menu&#39;,
+
+        &#39;Ext.ux.desktop.StartMenu&#39;
+    ],
+
+    alias: &#39;widget.taskbar&#39;,
+
+<span id='Ext-ux-desktop-TaskBar-cfg-cls'>    cls: &#39;ux-taskbar&#39;,
+</span>
+<span id='Ext-ux-desktop-TaskBar-cfg-startBtnText'>    /**
+</span>     * @cfg {String} startBtnText
+     * The text for the Start Button.
+     */
+    startBtnText: &#39;Start&#39;,
+
+<span id='Ext-ux-desktop-TaskBar-method-initComponent'>    initComponent: function () {
+</span>        var me = this;
+        
+        me.startMenu = new Ext.ux.desktop.StartMenu(me.startConfig);
+
+        me.quickStart = new Ext.toolbar.Toolbar(me.getQuickStart());
+
+        me.windowBar = new Ext.toolbar.Toolbar(me.getWindowBarConfig());
+
+        me.tray = new Ext.toolbar.Toolbar(me.getTrayConfig());
+
+        me.items = [
+            {
+                xtype: &#39;button&#39;,
+                cls: &#39;ux-start-button&#39;,
+                iconCls: &#39;ux-start-button-icon&#39;,
+                menu: me.startMenu,
+                menuAlign: &#39;bl-tl&#39;,
+                text: me.startBtnText
+            },
+            me.quickStart,
+            {
+                xtype: &#39;splitter&#39;, html: &#39;&amp;#160;&#39;,
+                height: 14, width: 2, // TODO - there should be a CSS way here
+                cls: &#39;x-toolbar-separator x-toolbar-separator-horizontal&#39;
+            },
+            me.windowBar,
+            &#39;-&#39;,
+            me.tray
+        ];
+
+        me.callParent();
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-afterLayout'>    afterLayout: function () {
+</span>        var me = this;
+        me.callParent();
+        me.windowBar.el.on(&#39;contextmenu&#39;, me.onButtonContextMenu, me);
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-getQuickStart'>    /**
+</span>     * This method returns the configuration object for the Quick Start toolbar. A derived
+     * class can override this method, call the base version to build the config and
+     * then modify the returned object before returning it.
+     */
+    getQuickStart: function () {
+        var me = this, ret = {
+            minWidth: 20,
+            width: Ext.themeName === &#39;neptune&#39; ? 70 : 60,
+            items: [],
+            enableOverflow: true
+        };
+
+        Ext.each(this.quickStart, function (item) {
+            ret.items.push({
+                tooltip: { text: item.name, align: &#39;bl-tl&#39; },
+                //tooltip: item.name,
+                overflowText: item.name,
+                iconCls: item.iconCls,
+                module: item.module,
+                handler: me.onQuickStartClick,
+                scope: me
+            });
+        });
+
+        return ret;
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-getTrayConfig'>    /**
+</span>     * This method returns the configuration object for the Tray toolbar. A derived
+     * class can override this method, call the base version to build the config and
+     * then modify the returned object before returning it.
+     */
+    getTrayConfig: function () {
+        var ret = {
+            items: this.trayItems
+        };
+        delete this.trayItems;
+        return ret;
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-getWindowBarConfig'>    getWindowBarConfig: function () {
+</span>        return {
+            flex: 1,
+            cls: &#39;ux-desktop-windowbar&#39;,
+            items: [ &#39;&amp;#160;&#39; ],
+            layout: { overflowHandler: &#39;Scroller&#39; }
+        };
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-getWindowBtnFromEl'>    getWindowBtnFromEl: function (el) {
+</span>        var c = this.windowBar.getChildByElement(el);
+        return c || null;
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-onQuickStartClick'>    onQuickStartClick: function (btn) {
+</span>        var module = this.app.getModule(btn.module),
+            window;
+
+        if (module) {
+            window = module.createWindow();
+            window.show();
+        }
+    },
+    
+<span id='Ext-ux-desktop-TaskBar-method-onButtonContextMenu'>    onButtonContextMenu: function (e) {
+</span>        var me = this, t = e.getTarget(), btn = me.getWindowBtnFromEl(t);
+        if (btn) {
+            e.stopEvent();
+            me.windowMenu.theWin = btn.win;
+            me.windowMenu.showBy(t);
+        }
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-onWindowBtnClick'>    onWindowBtnClick: function (btn) {
+</span>        var win = btn.win;
+
+        if (win.minimized || win.hidden) {
+            btn.disable();
+            win.show(null, function() {
+                btn.enable();
+            });
+        } else if (win.active) {
+            btn.disable();
+            win.on(&#39;hide&#39;, function() {
+                btn.enable();
+            }, null, {single: true});
+            win.minimize();
+        } else {
+            win.toFront();
+        }
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-addTaskButton'>    addTaskButton: function(win) {
+</span>        var config = {
+            iconCls: win.iconCls,
+            enableToggle: true,
+            toggleGroup: &#39;all&#39;,
+            width: 140,
+            margin: &#39;0 2 0 3&#39;,
+            text: Ext.util.Format.ellipsis(win.title, 20),
+            listeners: {
+                click: this.onWindowBtnClick,
+                scope: this
+            },
+            win: win
+        };
+
+        var cmp = this.windowBar.add(config);
+        cmp.toggle(true);
+        return cmp;
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-removeTaskButton'>    removeTaskButton: function (btn) {
+</span>        var found, me = this;
+        me.windowBar.items.each(function (item) {
+            if (item === btn) {
+                found = item;
+            }
+            return !found;
+        });
+        if (found) {
+            me.windowBar.remove(found);
+        }
+        return found;
+    },
+
+<span id='Ext-ux-desktop-TaskBar-method-setActiveButton'>    setActiveButton: function(btn) {
+</span>        if (btn) {
+            btn.toggle(true);
+        } else {
+            this.windowBar.items.each(function (item) {
+                if (item.isButton) {
+                    item.toggle(false);
+                }
+            });
+        }
+    }
+});
+
+<span id='Ext-ux-desktop-TrayClock'>/**
+</span> * @class Ext.ux.desktop.TrayClock
+ * @extends Ext.toolbar.TextItem
+ * This class displays a clock on the toolbar.
+ */
+Ext.define(&#39;Ext.ux.desktop.TrayClock&#39;, {
+    extend: &#39;Ext.toolbar.TextItem&#39;,
+
+    alias: &#39;widget.trayclock&#39;,
+
+<span id='Ext-ux-desktop-TrayClock-cfg-cls'>    cls: &#39;ux-desktop-trayclock&#39;,
+</span>
+<span id='Ext-ux-desktop-TrayClock-cfg-html'>    html: &#39;&amp;#160;&#39;,
+</span>
+<span id='Ext-ux-desktop-TrayClock-property-timeFormat'>    timeFormat: &#39;g:i A&#39;,
+</span>
+<span id='Ext-ux-desktop-TrayClock-cfg-tpl'>    tpl: &#39;{time}&#39;,
+</span>
+<span id='Ext-ux-desktop-TrayClock-method-initComponent'>    initComponent: function () {
+</span>        var me = this;
+
+        me.callParent();
+
+        if (typeof(me.tpl) == &#39;string&#39;) {
+            me.tpl = new Ext.XTemplate(me.tpl);
+        }
+    },
+
+<span id='Ext-ux-desktop-TrayClock-method-afterRender'>    afterRender: function () {
+</span>        var me = this;
+        Ext.Function.defer(me.updateTime, 100, me);
+        me.callParent();
+    },
+
+<span id='Ext-ux-desktop-TrayClock-method-onDestroy'>    onDestroy: function () {
+</span>        var me = this;
+
+        if (me.timer) {
+            window.clearTimeout(me.timer);
+            me.timer = null;
+        }
+
+        me.callParent();
+    },
+
+<span id='Ext-ux-desktop-TrayClock-method-updateTime'>    updateTime: function () {
+</span>        var me = this, time = Ext.Date.format(new Date(), me.timeFormat),
+            text = me.tpl.apply({ time: time });
+        if (me.lastText != text) {
+            me.setText(text);
+            me.lastText = text;
+        }
+        me.timer = Ext.Function.defer(me.updateTime, 10000, me);
+    }
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.app.bindinspector.ViewModelDetail&#39;, {
+    extend: &#39;Ext.tree.Panel&#39;,
+    alias: &#39;widget.bindinspector-viewmodeldetail&#39;,
+    
+    rootVisible: false,
+    cls: Ext.baseCSSPrefix + &#39;bindinspector-viewmodeldetail&#39;,
+
+    inheritedCls: Ext.baseCSSPrefix + &#39;bindinspector-inherited&#39;,
+    notInheritedCls: Ext.baseCSSPrefix + &#39;bindinspector-not-inherited&#39;,
+    highlightedCls: Ext.baseCSSPrefix + &#39;bindinspector-highlighted&#39;,
+    unhighlightedCls: Ext.baseCSSPrefix + &#39;bindinspector-unhighlighted&#39;,
+    lastItemCls: Ext.baseCSSPrefix + &#39;bindinspector-last-item&#39;,
+
+    initComponent: function() {
+        var me = this,
+            vm = me.vm,
+            title = &#39;VM &amp;nbsp;&amp;nbsp;&amp;nbsp;⇒ &amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;,
+            env = me.up(&#39;bindinspector-container&#39;).env,
+            comp = env.getCmp(vm.view);
+        
+        // add the component&#39;s reference to the title if it has a reference
+        if (comp.reference) {
+            title += &#39;[&#39; + comp.reference + &#39;] &amp;bull; &#39;;
+        }
+
+        me.title = title += comp.id;
+
+        me.viewConfig = {
+            getRowClass: function (record, index, rowParams, store) {
+                var data = record.get(&#39;hasData&#39;),
+                    stub = record.get(&#39;hasStub&#39;),
+                    cls = [],
+                    highlighted = record.get(&#39;highlighted&#39;);
+
+                // indicate whether the root data property is inherited or belongs to this VM
+                if (record.get(&#39;inherited&#39;)) {
+                    cls.push(me.inheritedCls);
+                } else {
+                    cls.push(me.notInheritedCls);
+                }
+
+                // indicate whether the the data corresponds to the selected binding from
+                // ComponentDetail.onSelectionChange()
+                if (highlighted === true) {
+                    cls.push(me.highlightedCls);
+                } else if (highlighted === -1) {
+                    cls.push(me.unhighlightedCls);
+                }
+
+                // decoration for the last item in the tree (adds a shadow for modern browsers)
+                if (index === store.getCount() - 1) {
+                    cls.push(me.lastItemCls);
+                }
+
+                // indicate if the data point is present, but there is no component binding to it
+                if (data &amp;&amp; (!stub || record.get(&#39;cumulativeBindCount&#39;) === 0)) {
+                    cls.push(me.dataOnlyCls);
+                }
+
+                return cls.join(&#39; &#39;);
+            }
+        };
+        
+        me.store = {
+            model: me.Model,
+            root: {
+                text: &#39;Root&#39;,
+                expanded: true,
+                children: me.setupData(vm, vm.data, vm.rootStub)
+            }
+        };
+        me.columns = [{
+            width: 40,
+            tdCls: Ext.baseCSSPrefix + &#39;bindinspector-indicator-col&#39;,
+            align: &#39;center&#39;,
+            scope: me,
+            renderer: me.renderIndicator
+        }, {
+            flex: 1,
+            xtype: &#39;treecolumn&#39;,
+            dataIndex: &#39;name&#39;,
+            text: &#39;Name&#39;,
+            scope: me,
+            renderer: me.renderName
+        }, {
+            flex: 1,
+            dataIndex: &#39;value&#39;,
+            text: &#39;Value&#39;,
+            scope: me,
+            renderer: Ext.app.bindinspector.Util.valueRenderer
+        }, {
+            text: &#39;Bind #&#39;,
+            width: 64,
+            align: &#39;center&#39;,
+            renderer: me.renderBindCount,
+            scope: me
+        }, {
+            width: 40,
+            isSearch: true,
+            renderer: me.dataSrcConsumerRenderer,
+            scope: me
+        }];
+        me.callParent();
+
+        me.on(&#39;cellclick&#39;, me.onSearchCellClick, me);
+    },
+    
+    dataOnlyNode: &#39;This item contains data but has nothing requesting the value&#39;,
+    stubOnlyNode: &#39;This item has the value requested but no data backing it&#39;,
+    dataPointLoading: &#39;Data point is loading (at the time the app snapshot was captured)&#39;,
+
+    dataPointLoadingCls: Ext.baseCSSPrefix + &#39;bindinspector-isloading&#39;,
+    zeroBindingCls: Ext.baseCSSPrefix + &#39;bi-zero-bind-count&#39;,
+    dataOnlyCls: Ext.baseCSSPrefix + &#39;bindinspector-data-only&#39;,
+    stubOnlyCls: Ext.baseCSSPrefix + &#39;bindinspector-stub-only&#39;,
+
+    // handler for when the icon in the search column (has config isSearch: true) is clicked // upwardly handled by Container
+    onSearchCellClick: function (view, td, cellIndex, rec, tr, rowIndex, e) {
+        if (view.getHeaderCt().getHeaderAtIndex(cellIndex).isSearch) {
+            this.up(&#39;bindinspector-container&#39;).fireEvent(&#39;vmSearchClick&#39;, rec);
+        }
+    },
+
+    // helper method to find the root data node from any passed node in the hierarchy
+    getFirstTierRec: function (rec) {
+        var isFirstTier = rec.parentNode.isRoot(),
+            firstTier;
+
+        if (!isFirstTier) {
+            rec.bubble(function (ni) {
+                if (ni.parentNode.isRoot()) {
+                    firstTier = ni;
+                    return false;
+                }
+            });
+        }
+
+        return isFirstTier ? rec : firstTier;
+    },
+
+    // renderer for the search icon column - shows a search icon and the root data node that will be searched for in all parent VMs when clicked
+    dataSrcConsumerRenderer: function (v, meta, rec) {
+        var firstTier = this.getFirstTierRec(rec),
+            firstTierName = firstTier.get(&#39;name&#39;);
+
+        meta.tdCls = Ext.baseCSSPrefix + &#39;bindinspector-data-search-cell&#39;;
+        meta.tdAttr = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;Click to indicate within the Component List all ViewModels with a data property of &amp;nbsp;&lt;b&gt;&#39; + firstTierName + &#39;&lt;/b&gt;&quot;&#39;;
+    },
+
+    // renderer for the indicator column - shows whether the data point originates from this VM, an ancestor VM, or in both this and some ancestor VM
+    renderIndicator: function (v, meta, rec) {
+        var ownerVMs = rec.get(&#39;ownerVMs&#39;),
+            len = ownerVMs.length,
+            direct = false,
+            inherited = false,
+            val = &#39;&#39;,
+            firstTier = this.getFirstTierRec(rec),
+            isFirstTier = firstTier === rec,
+            firstTierName = firstTier.get(&#39;name&#39;),
+            vmPlural;
+
+        Ext.Array.forEach(ownerVMs, function (vm) {
+            if (vm.id === vm.thisVM) {
+                direct = true;
+            }
+            if (vm.id !== vm.thisVM) {
+                inherited = true;
+            }
+        });
+
+        if (direct &amp;&amp; inherited) {
+            val = Ext.util.Format.format(&#39;&lt;span style=&quot;color:#DB7851;&quot;&gt;{0}&lt;/span&gt;&#39;, isFirstTier ? &#39;◓&#39; : &#39;-&#39;);
+            vmPlural = len &gt; 1 ? &#39;VMs&#39; : &#39;VM&#39;;
+            meta.tdAttr = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&lt;b&gt;&#39; + firstTierName + &#39;&lt;/b&gt;&amp;nbsp; provided by this VM and &#39; + (len - 1) + &#39; ancestor &#39; + vmPlural + &#39;&quot;&#39;;
+        } else if (direct) {
+            val = isFirstTier ? &#39;●&#39; : &#39;&#39;;
+            meta.tdAttr = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&lt;b&gt;&#39; + firstTierName + &#39;&lt;/b&gt;&amp;nbsp; is provided by this VM&quot;&#39;;
+        } else if (inherited) {
+            val = isFirstTier ? &#39;○&#39; : &#39;&#39;;
+            vmPlural = len &gt; 1 ? &#39;VMs&#39; : &#39;VM&#39;;
+            meta.tdAttr = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&lt;b&gt;&#39; + firstTierName + &#39;&lt;/b&gt;&amp;nbsp; is provided by &#39; + len + &#39; ancestor &#39; + vmPlural + &#39;&quot;&#39;;
+        }
+
+        return val;
+    },
+
+    // renderer for the bind count column
+    renderBindCount: function (v, meta, rec) {
+        var len = rec.get(&#39;children&#39;).length,
+            bindCount = rec.get(&#39;bindCount&#39;) || 0,
+            total, bindingsText;
+
+        v = bindCount;
+
+        if (v === 0) {
+            v = &#39;&lt;span class=&quot;&#39; + this.zeroBindingCls + &#39;&quot;&gt;&#39; + v + &#39;&lt;/span&gt;&#39;;
+        }
+
+        if (len) {
+            total = rec.get(&#39;cumulativeBindCount&#39;) || &#39;?&#39;;
+            if (total === 0 || total === &#39;?&#39;) {
+                v += &#39; / &lt;span class=&quot;&#39; + this.zeroBindingCls + &#39;&quot;&gt;&#39; + total + &#39;&lt;/span&gt;&#39;;
+            } else {
+                v += &#39; / &#39; + total;
+            }
+        }
+
+        bindingsText = &#39;Bindings Count = &lt;b&gt;&#39; + bindCount + &#39;&lt;/b&gt;&#39;;
+        if (total &amp;&amp; total !== 0 &amp;&amp; total !== &#39;?&#39;) {
+            bindingsText += &#39;&lt;br&gt;Cumulative Bindings Count = &lt;b&gt;&#39; + total + &#39;&lt;/b&gt;&#39;;
+        }
+
+        meta.tdAttr = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&#39; + bindingsText + &#39;&quot;&#39;;
+        return v;
+    },
+    
+    // renderer for the main tree column
+    renderName: function(v, meta, rec) {
+        var me = this,
+            data = rec.get(&#39;hasData&#39;),
+            stub = rec.get(&#39;hasStub&#39;),
+            tip = &#39;&#39;;
+
+        if (rec.get(&#39;isLoading&#39;)) {
+            meta.tdCls = me.dataPointLoadingCls;
+            tip += me.dataPointLoading;
+        } else if (data &amp;&amp; (!stub || rec.get(&#39;cumulativeBindCount&#39;) === 0)) {
+            tip += me.dataOnlyNode;
+        } else if (stub &amp;&amp; !data) {
+            meta.tdCls = me.stubOnlyCls;
+            tip += me.stubOnlyNode;
+        }
+
+        if (tip !== &#39;&#39;) {
+            meta.tdAttr = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&#39; + tip + &#39;&quot;&#39;;
+        }
+        
+        return v;
+    },
+    
+    // build method to construct the nodes displayed in the ViewModelDetail tree
+    setupData: function(vm, data, stub, inherited, ownerVMs) {
+        var merged = {},
+            out = [],
+            dataMap = vm.dataMap,
+            dm = [],
+            item, children, stubChild, key, stopDigging, linkInfo;
+        
+        if (data &amp;&amp; Ext.isObject(data)) {
+            if (data.isModel) {
+                data = data.data;
+                // prevent looping any deeper over the model
+                stopDigging = true;
+            } else if (data.isStore) {
+                stopDigging = true;
+                data = null;
+            }
+            if (data) {
+                for (key in data) {
+                    if (!ownerVMs) {
+                        dm = dataMap[key] ? dataMap[key].ownerVMs : [];
+                    }
+                    item = {
+                        name: key,
+                        value: data[key],
+                        inherited: Ext.isDefined(inherited) ? inherited : !data.hasOwnProperty(key),
+                        ownerVMs: Ext.isDefined(ownerVMs) ? ownerVMs : [],
+                        hasData: true
+                    };
+                    Ext.Array.forEach(dm, function (v) {
+                        item.ownerVMs.push({
+                            id: v.id,
+                            view: v.view,
+                            thisVM: vm.id
+                        });
+                    });
+                    stubChild = Ext.app.bindinspector.Util.getChildStub(key, stub);
+                    if (stubChild) {
+                        item.hasStub = true;
+                        item.isLoading = stubChild.isLoading;
+                        item.iconCls = stubChild.isLoading ? this.dataPointLoadingCls : &#39;&#39;;
+                        item.bindCount = stubChild.bindCount;
+                        item.cumulativeBindCount = stubChild.cumulativeBindCount;
+                        item.stub = stubChild;
+                    }
+                    merged[key] = item;
+                }
+            }
+        }
+
+        if (stub) {
+            children = stub.children;
+            for (key in children) {
+                stubChild = children[key];
+                item = merged[key];
+                if (!item) {
+                    item = {
+                        name: key,
+                        value: stubChild.value || undefined,
+                        inherited: inherited || false,
+                        ownerVMs: ownerVMs || [],
+                        hasData: false,
+                        hasStub: true,
+                        isLoading: stubChild.isLoading,
+                        iconCls: stubChild.isLoading ? this.dataPointLoadingCls : &#39;&#39;,
+                        bindCount: stubChild.bindCount,
+                        cumulativeBindCount: stubChild.cumulativeBindCount,
+                        stub: stubChild
+                    };
+                    linkInfo = stubChild.linkInfo;
+                    if (linkInfo &amp;&amp; linkInfo.sameTarget) {
+                        item.value = linkInfo.value;
+                        // Fudge having data, since we don&#39;t want to show an icon
+                        // for all links
+                        item.hasData = item.value !== undefined;
+                    }
+                    merged[key] = item;
+                }
+            }
+        }
+
+        for (key in merged) {
+            item = merged[key];
+            //if (!stopDigging) { // was missing nested model data with stopDigging
+                item.children = this.setupData(vm, item.value, item.stub, item.inherited, item.ownerVMs);
+            //}
+            delete item.stub;
+            if (item.children &amp;&amp; item.children.length) {
+                item.expanded = true;
+                item.leaf = false;
+            } else {
+                item.leaf = true;
+            }
+            out.push(merged[key]);
+        }
+        
+        return out;
+    }
+}, function() {
+    this.prototype.Model = Ext.define(null, {
+        extend: &#39;Ext.data.TreeModel&#39;,
+        fields: [&#39;name&#39;, &#39;value&#39;, &#39;inherited&#39;, &#39;hasData&#39;, &#39;hasStub&#39;, &#39;isLoading&#39;, &#39;bindCount&#39;, &#39;cumulativeBindCount&#39;, &#39;highlighted&#39;]
+    });
+});</pre>
+</body>
+</html>

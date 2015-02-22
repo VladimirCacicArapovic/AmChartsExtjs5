@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-DataView-Draggable'>/**
+</span> * @author Ed Spencer
+ *
+ * ## Basic DataView with Draggable mixin.
+ *
+ *     Ext.Loader.setPath(&#39;Ext.ux&#39;, &#39;../../../SDK/extjs/examples/ux&#39;);
+ *
+ *     Ext.define(&#39;My.cool.View&#39;, {
+ *         extend: &#39;Ext.view.View&#39;,
+ *
+ *         mixins: {
+ *             draggable: &#39;Ext.ux.DataView.Draggable&#39;
+ *         },
+ *
+ *         initComponent: function() {
+ *             this.mixins.draggable.init(this, {
+ *                 ddConfig: {
+ *                     ddGroup: &#39;someGroup&#39;
+ *                 }
+ *             });
+ * 
+ *             this.callParent(arguments);
+ *         }
+ *     });
+ *
+ *     Ext.onReady(function () {
+ *         Ext.create(&#39;Ext.data.Store&#39;, {
+ *             storeId: &#39;baseball&#39;,
+ *             fields: [&#39;team&#39;, &#39;established&#39;],
+ *             data: [
+ *                 { team: &#39;Atlanta Braves&#39;, established: &#39;1871&#39; },
+ *                 { team: &#39;Miami Marlins&#39;, established: &#39;1993&#39; },
+ *                 { team: &#39;New York Mets&#39;, established: &#39;1962&#39; },
+ *                 { team: &#39;Philadelphia Phillies&#39;, established: &#39;1883&#39; },
+ *                 { team: &#39;Washington Nationals&#39;, established: &#39;1969&#39; }
+ *             ]
+ *          });
+ *
+ *          Ext.create(&#39;My.cool.View&#39;, {
+ *              store: Ext.StoreMgr.get(&#39;baseball&#39;),
+ *              tpl: [
+ *                  &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;, 
+ *                      &#39;&lt;p class=&quot;team&quot;&gt;&#39;, 
+ *                          &#39;The {team} were founded in {established}.&#39;,
+ *                      &#39;&lt;/p&gt;&#39;, 
+ *                  &#39;&lt;/tpl&gt;&#39;
+ *              ],
+ *              itemSelector: &#39;p.team&#39;,
+ *              renderTo: Ext.getBody()
+ *          });
+ *      });
+ */
+Ext.define(&#39;Ext.ux.DataView.Draggable&#39;, {
+    requires: &#39;Ext.dd.DragZone&#39;,
+
+<span id='Ext-ux-DataView-Draggable-cfg-ghostCls'>    /**
+</span>     * @cfg {String} ghostCls The CSS class added to the outermost element of the created ghost proxy
+     * (defaults to &#39;x-dataview-draggable-ghost&#39;)
+     */
+    ghostCls: &#39;x-dataview-draggable-ghost&#39;,
+
+<span id='Ext-ux-DataView-Draggable-cfg-ghostTpl'>    /**
+</span>     * @cfg {Ext.XTemplate/Array} ghostTpl The template used in the ghost DataView
+     */
+    ghostTpl: [
+        &#39;&lt;tpl for=&quot;.&quot;&gt;&#39;,
+            &#39;{title}&#39;,
+        &#39;&lt;/tpl&gt;&#39;
+    ],
+
+<span id='Ext-ux-DataView-Draggable-cfg-ddConfig'>    /**
+</span>     * @cfg {Object} ddConfig Config object that is applied to the internally created DragZone
+     */
+
+<span id='Ext-ux-DataView-Draggable-cfg-ghostConfig'>    /**
+</span>     * @cfg {String} ghostConfig Config object that is used to configure the internally created DataView
+     */
+
+    init: function(dataview, config) {
+<span id='Ext-ux-DataView-Draggable-property-dataview'>        /**
+</span>         * @property dataview
+         * @type Ext.view.View
+         * The Ext.view.View instance that this DragZone is attached to
+         */
+        this.dataview = dataview;
+
+        dataview.on(&#39;render&#39;, this.onRender, this);
+
+        Ext.apply(this, {
+            itemSelector: dataview.itemSelector,
+            ghostConfig : {}
+        }, config || {});
+
+        Ext.applyIf(this.ghostConfig, {
+            itemSelector: &#39;img&#39;,
+            cls: this.ghostCls,
+            tpl: this.ghostTpl
+        });
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-onRender'>    /**
+</span>     * @private
+     * Called when the attached DataView is rendered. Sets up the internal DragZone
+     */
+    onRender: function() {
+        var config = Ext.apply({}, this.ddConfig || {}, {
+            dvDraggable: this,
+            dataview   : this.dataview,
+            getDragData: this.getDragData,
+            getTreeNode: this.getTreeNode,
+            afterRepair: this.afterRepair,
+            getRepairXY: this.getRepairXY
+        });
+
+<span id='Ext-ux-DataView-Draggable-property-dragZone'>        /**
+</span>         * @property dragZone
+         * @type Ext.dd.DragZone
+         * The attached DragZone instane
+         */
+        this.dragZone = Ext.create(&#39;Ext.dd.DragZone&#39;, this.dataview.getEl(), config);
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-getDragData'>    getDragData: function(e) {
+</span>        var draggable = this.dvDraggable,
+            dataview  = this.dataview,
+            selModel  = dataview.getSelectionModel(),
+            target    = e.getTarget(draggable.itemSelector),
+            selected, dragData;
+
+        if (target) {
+            if (!dataview.isSelected(target)) {
+                selModel.select(dataview.getRecord(target));
+            }
+
+            selected = dataview.getSelectedNodes();
+            dragData = {
+                copy: true,
+                nodes: selected,
+                records: selModel.getSelection(),
+                item: true
+            };
+
+            if (selected.length === 1) {
+                dragData.single = true;
+                dragData.ddel = target;
+            } else {
+                dragData.multi = true;
+                dragData.ddel = draggable.prepareGhost(selModel.getSelection());
+            }
+
+            return dragData;
+        }
+
+        return false;
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-getTreeNode'>    getTreeNode: function() {
+</span>        // console.log(&#39;test&#39;);
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-afterRepair'>    afterRepair: function() {
+</span>        this.dragging = false;
+
+        var nodes  = this.dragData.nodes,
+            length = nodes.length,
+            i;
+
+        //FIXME: Ext.fly does not work here for some reason, only frames the last node
+        for (i = 0; i &lt; length; i++) {
+            Ext.get(nodes[i]).frame(&#39;#8db2e3&#39;, 1);
+        }
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-getRepairXY'>    /**
+</span>     * @private
+     * Returns the x and y co-ordinates that the dragged item should be animated back to if it was dropped on an
+     * invalid drop target. If we&#39;re dragging more than one item we don&#39;t animate back and just allow afterRepair
+     * to frame each dropped item.
+     */
+    getRepairXY: function(e) {
+        if (this.dragData.multi) {
+            return false;
+        } else {
+            var repairEl = Ext.get(this.dragData.ddel),
+                repairXY = repairEl.getXY();
+
+            //take the item&#39;s margins and padding into account to make the repair animation line up perfectly
+            repairXY[0] += repairEl.getPadding(&#39;t&#39;) + repairEl.getMargin(&#39;t&#39;);
+            repairXY[1] += repairEl.getPadding(&#39;l&#39;) + repairEl.getMargin(&#39;l&#39;);
+
+            return repairXY;
+        }
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-prepareGhost'>    /**
+</span>     * Updates the internal ghost DataView by ensuring it is rendered and contains the correct records
+     * @param {Array} records The set of records that is currently selected in the parent DataView
+     * @return {HtmlElement} The Ghost DataView&#39;s encapsulating HtmnlElement.
+     */
+    prepareGhost: function(records) {
+        return this.createGhost(records).getEl().dom;
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-createGhost'>    /**
+</span>     * @private
+     * Creates the &#39;ghost&#39; DataView that follows the mouse cursor during the drag operation. This div is usually a
+     * lighter-weight representation of just the nodes that are selected in the parent DataView.
+     */
+    createGhost: function(records) {
+        var me = this,
+            store;
+
+        if (me.ghost) {
+            (store = me.ghost.store).loadRecords(records);
+        } else {
+            store = Ext.create(&#39;Ext.data.Store&#39;, {
+                model: records[0].self
+            });
+
+            store.loadRecords(records);
+            me.ghost = Ext.create(&#39;Ext.view.View&#39;, Ext.apply({
+                renderTo: document.createElement(&#39;div&#39;),
+                store: store
+            }, me.ghostConfig));
+            me.ghost.container.skipGarbageCollection = me.ghost.el.skipGarbageCollection = true;
+        }
+        store.clearData();
+
+        return me.ghost;
+    },
+
+<span id='Ext-ux-DataView-Draggable-method-destroy'>    destroy: function() {
+</span>        if (this.ghost) {
+            this.ghost.container.destroy();
+            this.ghost.destroy();
+        }
+    }
+});
+</pre>
+</body>
+</html>

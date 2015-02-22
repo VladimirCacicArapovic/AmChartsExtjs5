@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-layout-container-Center'>/**
+</span> * This layout manager is used to center contents within a container. As a subclass of
+ * {@link Ext.layout.container.Fit fit layout}, CenterLayout expects to have one child
+ * item; multiple items will be placed overlapping. The layout does not require any config
+ * options. Items in the container can use percentage width or height rather than be fit
+ * to the full size of the container.
+ *
+ * Example usage:
+ *
+ *      // The content panel is centered in the container
+ *
+ *      var p = Ext.create(&#39;Ext.Panel&#39;, {
+ *          title: &#39;Center Layout&#39;,
+ *          layout: &#39;center&#39;,
+ *          items: [{
+ *              title: &#39;Centered Content&#39;,
+ *              width: &#39;75%&#39;,  // assign 75% of the container width to the item
+ *              html: &#39;Some content&#39;
+ *          }]
+ *      });
+ *
+ * If you leave the title blank and specify no border you can create a non-visual, structural
+ * container just for centering the contents.
+ *
+ *      var p = Ext.create(&#39;Ext.Container&#39;, {
+ *          layout: &#39;center&#39;,
+ *          items: [{
+ *              title: &#39;Centered Content&#39;,
+ *              width: 300,
+ *              height: &#39;90%&#39;, // assign 90% of the container height to the item
+ *              html: &#39;Some content&#39;
+ *          }]
+ *      });
+ */
+Ext.define(&#39;Ext.layout.container.Center&#39;, {
+    extend: &#39;Ext.layout.container.Fit&#39;,
+    alias: [ 
+        &#39;layout.center&#39;,
+        &#39;layout.ux.center&#39;
+    ],
+
+    alternateClassName: &#39;Ext.ux.layout.Center&#39;,
+    
+<span id='Ext-layout-container-Center-property-percentRe'>    percentRe: /^\d+(?:\.\d+)?\%$/,
+</span>
+<span id='Ext-layout-container-Center-cfg-itemCls'>    itemCls: Ext.baseCSSPrefix + &#39;center-layout-item&#39;,
+</span><span id='Ext-layout-container-Center-property-targetCls'>    targetCls: Ext.baseCSSPrefix + &#39;center-layout&#39;,
+</span>
+<span id='Ext-layout-container-Center-method-getItemSizePolicy'>    getItemSizePolicy: function (item, ownerSizeModel) {
+</span>        var me = this,
+            sizeModel = ownerSizeModel || me.owner.getSizeModel(),
+            percentRe = me.percentRe,
+            mode = ((sizeModel.width.shrinkWrap || !percentRe.test(item.width)) ? 0 : 1) |
+                ((sizeModel.height.shrinkWrap || !percentRe.test(item.height)) ? 0 : 2);
+
+        return me.sizePolicies[mode];
+    },
+
+<span id='Ext-layout-container-Center-method-getPos'>    getPos: function (itemContext, info, dimension) {
+</span>        var size = itemContext.props[dimension] + info.margins[dimension],
+            pos = Math.round((info.targetSize[dimension] - size) / 2);
+
+        if (isNaN(pos)) {
+            this.done = false;
+        }
+        return Math.max(pos, 0);
+    },
+
+<span id='Ext-layout-container-Center-method-positionItemX'>    positionItemX: function (itemContext, info) {
+</span>        var left = this.getPos(itemContext, info, &#39;width&#39;);
+
+        itemContext.setProp(&#39;x&#39;, left);
+    },
+
+<span id='Ext-layout-container-Center-method-positionItemY'>    positionItemY: function (itemContext, info) {
+</span>        var top = this.getPos(itemContext, info, &#39;height&#39;);
+
+
+        itemContext.setProp(&#39;y&#39;, top);
+    },
+
+<span id='Ext-layout-container-Center-method-setItemHeight'>    setItemHeight: function (itemContext, info) {
+</span>        var ratio = parseFloat(itemContext.target.height) / 100;
+        itemContext.setHeight(Math.round((info.targetSize.height - info.margins.height) * ratio));
+    },
+
+<span id='Ext-layout-container-Center-method-setItemWidth'>    setItemWidth: function (itemContext, info) {
+</span>        var ratio = parseFloat(itemContext.target.width) / 100;
+        itemContext.setWidth(Math.round((info.targetSize.width - info.margins.width) * ratio));
+    }
+});
+</pre>
+</body>
+</html>

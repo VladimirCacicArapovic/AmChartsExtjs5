@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-event-RecorderManager'>/**
+</span> * Recorder manager.
+ * Used as a bookmarklet:
+ *
+ *    javascript:void(window.open(&quot;../ux/event/RecorderManager.html&quot;,&quot;recmgr&quot;))
+ */
+Ext.define(&#39;Ext.ux.event.RecorderManager&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+
+    alias: &#39;widget.eventrecordermanager&#39;,
+
+    uses: [
+        &#39;Ext.ux.event.Recorder&#39;,
+        &#39;Ext.ux.event.Player&#39;
+    ],
+
+<span id='Ext-ux-event-RecorderManager-cfg-layout'>    layout: &#39;fit&#39;,
+</span><span id='Ext-ux-event-RecorderManager-cfg-buttonAlign'>    buttonAlign: &#39;left&#39;,
+</span>
+<span id='Ext-ux-event-RecorderManager-property-eventsToIgnore'>    eventsToIgnore: {
+</span>        mousemove: 1,
+        mouseover: 1,
+        mouseout: 1
+    },
+
+<span id='Ext-ux-event-RecorderManager-cfg-bodyBorder'>    bodyBorder: false,
+</span><span id='Ext-ux-event-RecorderManager-property-playSpeed'>    playSpeed: 1,
+</span>
+<span id='Ext-ux-event-RecorderManager-method-initComponent'>    initComponent: function () {
+</span>        var me = this;
+
+        me.recorder = new Ext.ux.event.Recorder({
+            attachTo: me.attachTo,
+            listeners: {
+                add: me.updateEvents,
+                coalesce: me.updateEvents,
+                buffer: 200,
+                scope: me
+            }
+        });
+        me.recorder.eventsToRecord = Ext.apply({}, me.recorder.eventsToRecord);
+
+        function speed (text, value) {
+            return {
+                text: text,
+                speed: value,
+                group: &#39;speed&#39;,
+                checked: value == me.playSpeed,
+                handler: me.onPlaySpeed,
+                scope: me
+            };
+        }
+
+        me.tbar = [
+            {
+                text: &#39;Record&#39;,
+                xtype: &#39;splitbutton&#39;,
+                whenIdle: true,
+                handler: me.onRecord,
+                scope: me,
+                menu: me.makeRecordButtonMenu()
+            },
+            {
+                text: &#39;Play&#39;,
+                xtype: &#39;splitbutton&#39;,
+                whenIdle: true,
+                handler: me.onPlay,
+                scope: me,
+                menu: [
+                    speed(&#39;Recorded Speed (1x)&#39;, 1),
+                    speed(&#39;Double Speed (2x)&#39;, 2),
+                    speed(&#39;Quad Speed (4x)&#39;, 4),
+                    &#39;-&#39;,
+                    speed(&#39;Full Speed&#39;, 1000)
+                ]
+            },
+            {
+                text: &#39;Clear&#39;,
+                whenIdle: true,
+                handler: me.onClear,
+                scope: me
+            },
+            &#39;-&gt;&#39;,
+            {
+                text: &#39;Stop&#39;,
+                whenActive: true,
+                disabled: true,
+                handler: me.onStop,
+                scope: me
+            }
+        ];
+
+        var events = me.attachTo &amp;&amp; me.attachTo.testEvents;
+        me.items = [
+            {
+                xtype: &#39;textarea&#39;,
+                itemId: &#39;eventView&#39;,
+                fieldStyle: &#39;font-family: monospace&#39;,
+                selectOnFocus: true,
+                emptyText: &#39;Events go here!&#39;,
+                value: events ? me.stringifyEvents(events) : &#39;&#39;,
+                scrollToBottom: function () {
+                    var inputEl = this.inputEl.dom;
+                    inputEl.scrollTop = inputEl.scrollHeight;
+                }
+            }
+        ];
+        me.fbar = [
+            {
+                xtype: &#39;tbtext&#39;,
+                text: &#39;Attached To: &#39; + (me.attachTo &amp;&amp; me.attachTo.location.href)
+            }
+        ];
+
+        me.callParent();
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-makeRecordButtonMenu'>    makeRecordButtonMenu: function () {
+</span>        var ret = [],
+            subs = {},
+            eventsToRec = this.recorder.eventsToRecord,
+            ignoredEvents = this.eventsToIgnore;
+
+        Ext.Object.each(eventsToRec, function (name, value) {
+            var sub = subs[value.kind];
+            if (!sub) {
+                subs[value.kind] = sub = [];
+                ret.push({
+                    text: value.kind,
+                    menu: sub
+                });
+            }
+
+            sub.push({
+                text: name,
+                checked: true,
+                handler: function (menuItem) {
+                    if (menuItem.checked) {
+                        eventsToRec[name] = value;
+                    } else {
+                        delete eventsToRec[name];
+                    }
+                }
+            });
+
+            if (ignoredEvents[name]) {
+                sub[sub.length - 1].checked = false;
+                Ext.Function.defer(function () {
+                    delete eventsToRec[name];
+                }, 1);
+            }
+        });
+
+        function less (lhs, rhs) {
+            return (lhs.text &lt; rhs.text) ? -1
+                        : ((rhs.text &lt; lhs.text) ? 1 : 0);
+        }
+
+        ret.sort(less);
+        Ext.Array.each(ret, function (sub) {
+            sub.menu.sort(less);
+        });
+
+        return ret;
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-getEventView'>    getEventView: function () {
+</span>        return this.down(&#39;#eventView&#39;);
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-onClear'>    onClear: function () {
+</span>        var view = this.getEventView();
+        view.setValue(&#39;&#39;);
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-onPlay'>    onPlay: function () {
+</span>        var me = this,
+            view = me.getEventView(),
+            events = view.getValue();
+
+        if (events) {
+            events = Ext.decode(events);
+            if (events.length) {
+                me.player = Ext.create(&#39;Ext.ux.event.Player&#39;, {
+                    attachTo: window.opener,
+                    eventQueue: events,
+                    listeners: {
+                        stop: me.onPlayStop,
+                        scope: me
+                    }
+                });
+
+                me.player.start();
+                me.syncBtnUI();
+            }
+        }
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-onPlayStop'>    onPlayStop: function () {
+</span>        this.player = null;
+        this.syncBtnUI();
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-onPlaySpeed'>    onPlaySpeed: function (menuitem) {
+</span>        this.playSpeed = menuitem.speed;
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-onRecord'>    onRecord: function () {
+</span>        this.recorder.start();
+        this.syncBtnUI();
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-onStop'>    onStop: function () {
+</span>        var me = this;
+
+        if (me.player) {
+            me.player.stop();
+            me.player = null;
+        } else {
+            me.recorder.stop();
+        }
+        me.syncBtnUI();
+        me.updateEvents();
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-syncBtnUI'>    syncBtnUI: function () {
+</span>        var me = this,
+            idle = !me.player &amp;&amp; !me.recorder.active;
+
+        Ext.each(me.query(&#39;[whenIdle]&#39;), function (btn) {
+            btn.setDisabled(!idle);
+        });
+        Ext.each(me.query(&#39;[whenActive]&#39;), function (btn) {
+            btn.setDisabled(idle);
+        });
+
+        var view = me.getEventView();
+        view.setReadOnly(!idle);
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-stringifyEvents'>    stringifyEvents: function (events) {
+</span>        var line,
+            lines = [];
+
+        Ext.each(events, function (ev) {
+            line = [];
+
+            Ext.Object.each(ev, function (name, value) {
+                if (line.length) {
+                    line.push(&#39;, &#39;);
+                } else {
+                    line.push(&#39;  { &#39;);
+                }
+                line.push(name, &#39;: &#39;);
+                line.push(Ext.encode(value));
+            });
+
+            line.push(&#39; }&#39;);
+            lines.push(line.join(&#39;&#39;));
+        });
+
+        return &#39;[\n&#39; + lines.join(&#39;,\n&#39;) + &#39;\n]&#39;;
+    },
+
+<span id='Ext-ux-event-RecorderManager-method-updateEvents'>    updateEvents: function () {
+</span>        var me = this,
+            text = me.stringifyEvents(me.recorder.getRecordedEvents()),
+            view = me.getEventView();
+
+        view.setValue(text);
+        view.scrollToBottom();
+    }
+});
+</pre>
+</body>
+</html>

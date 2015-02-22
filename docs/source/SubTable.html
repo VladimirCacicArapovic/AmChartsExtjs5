@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-grid-SubTable'>/**
+</span> * A small grid nested within a parent grid&#39;s row. 
+ *
+ * See the [Kitchen Sink](http://dev.sencha.com/extjs/5.0.1/examples/kitchensink/#customer-grid) for example usage.
+ */
+Ext.define(&#39;Ext.ux.grid.SubTable&#39;, {
+    extend: &#39;Ext.grid.plugin.RowExpander&#39;,
+
+    alias: &#39;plugin.subtable&#39;,
+
+<span id='Ext-ux-grid-SubTable-cfg-rowBodyTpl'>    rowBodyTpl: [&#39;&lt;table class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-subtable&quot;&gt;&lt;tbody&gt;&#39;,
+</span>        &#39;{%&#39;,
+            &#39;this.owner.renderTable(out, values);&#39;,
+        &#39;%}&#39;,
+        &#39;&lt;/tbody&gt;&lt;/table&gt;&#39;
+    ],
+
+<span id='Ext-ux-grid-SubTable-method-init'>    init: function(grid) {
+</span>        var me = this,
+            columns = me.columns,
+            len, i, columnCfg;
+
+        me.callParent(arguments);
+
+        me.columns = [];
+        if (columns) {
+            for (i = 0, len = columns.length; i &lt; len; ++i) {
+                // Don&#39;t register with the component manager, we create them to use
+                // their rendering smarts, but don&#39;t want to treat them as real components
+                columnCfg = Ext.apply({
+                    preventRegister: true
+                }, columns[i]);
+                columnCfg.xtype = columnCfg.xtype || &#39;gridcolumn&#39;;
+                me.columns.push(Ext.widget(columnCfg));
+            }
+        }
+    },
+
+<span id='Ext-ux-grid-SubTable-method-destroy'>    destroy: function() {
+</span>        var columns = this.columns,
+            len, i;
+
+        if (columns) {
+            for (i = 0, len = columns.length; i &lt; len; ++i) {
+                columns[i].destroy();
+            }
+        }
+        this.columns = null;
+        this.callParent();
+    },
+
+<span id='Ext-ux-grid-SubTable-method-getRowBodyFeatureData'>    getRowBodyFeatureData: function(record, idx, rowValues) {
+</span>        this.callParent(arguments);
+        rowValues.rowBodyCls += &#39; &#39; + Ext.baseCSSPrefix + &#39;grid-subtable-row&#39;;
+    },
+
+<span id='Ext-ux-grid-SubTable-method-renderTable'>    renderTable: function(out, rowValues) {
+</span>        var me = this,
+            columns = me.columns,
+            numColumns = columns.length,
+            associatedRecords = me.getAssociatedRecords(rowValues.record),
+            recCount = associatedRecords.length,
+            rec, column, i, j, value;
+
+        out.push(&#39;&lt;thead&gt;&#39;);
+        for (j = 0; j &lt; numColumns; j++) {
+            out.push(&#39;&lt;th class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-subtable-header&quot;&gt;&#39;, columns[j].text, &#39;&lt;/th&gt;&#39;);
+        }
+        out.push(&#39;&lt;/thead&gt;&#39;);
+        for (i = 0; i &lt; recCount; i++) {
+            rec = associatedRecords[i];
+            out.push(&#39;&lt;tr&gt;&#39;);
+            for (j = 0; j &lt; numColumns; j++) {
+                column = columns[j];
+                value = rec.get(column.dataIndex);
+                if (column.renderer &amp;&amp; column.renderer.call) {
+                    value = column.renderer.call(column.scope || me, value, {}, rec);
+                }
+                out.push(&#39;&lt;td class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-subtable-cell&quot;&#39;);
+                if (column.width != null) {
+                    out.push(&#39; style=&quot;width:&#39; + column.width + &#39;px&quot;&#39;);
+                }
+                out.push(&#39;&gt;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-cell-inner&quot;&gt;&#39;, value, &#39;&lt;/div&gt;&lt;/td&gt;&#39;);
+            }
+            out.push(&#39;&lt;/tr&gt;&#39;);
+        }
+    },
+    
+<span id='Ext-ux-grid-SubTable-method-getRowBodyContentsFn'>    getRowBodyContentsFn: function(rowBodyTpl) {
+</span>        var me = this;
+        return function (rowValues) {
+            rowBodyTpl.owner = me;
+            return rowBodyTpl.applyTemplate(rowValues);
+        };
+    },
+    
+<span id='Ext-ux-grid-SubTable-method-getAssociatedRecords'>    getAssociatedRecords: function(record) {
+</span>        return record[this.association]().getRange();
+    }
+});</pre>
+</body>
+</html>

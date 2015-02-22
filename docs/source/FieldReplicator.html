@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-FieldReplicator'>/**
+</span> * &lt;p&gt;A plugin for Field Components which creates clones of the Field for as
+ * long as the user keeps filling them. Leaving the final one blank ends the repeating series.&lt;/p&gt;
+ * &lt;p&gt;Usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+    {
+        xtype: &#39;combo&#39;,
+        plugins: [ Ext.ux.FieldReplicator ],
+        triggerAction: &#39;all&#39;,
+        fieldLabel: &#39;Select recipient&#39;,
+        store: recipientStore
+    }
+ * &lt;/code&gt;&lt;/pre&gt;
+ */
+Ext.define(&#39;Ext.ux.FieldReplicator&#39;, {
+    alias: &#39;plugin.fieldreplicator&#39;,
+
+<span id='Ext-ux-FieldReplicator-method-init'>    init: function(field) {
+</span>        // Assign the field an id grouping it with fields cloned from it. If it already
+        // has an id that means it is itself a clone.
+        if (!field.replicatorId) {
+            field.replicatorId = Ext.id();
+        }
+
+        field.on(&#39;blur&#39;, this.onBlur, this);
+    },
+
+<span id='Ext-ux-FieldReplicator-method-onBlur'>    onBlur: function(field) {
+</span>        var ownerCt = field.ownerCt,
+            replicatorId = field.replicatorId,
+            isEmpty = Ext.isEmpty(field.getRawValue()),
+            siblings = ownerCt.query(&#39;[replicatorId=&#39; + replicatorId + &#39;]&#39;),
+            isLastInGroup = siblings[siblings.length - 1] === field,
+            clone, idx;
+
+        // If a field before the final one was blanked out, remove it
+        if (isEmpty &amp;&amp; !isLastInGroup) {
+            Ext.Function.defer(field.destroy, 10, field); //delay to allow tab key to move focus first
+        }
+        // If the field is the last in the list and has a value, add a cloned field after it
+        else if(!isEmpty &amp;&amp; isLastInGroup) {
+            if (field.onReplicate) {
+                field.onReplicate();
+            }
+            clone = field.cloneConfig({replicatorId: replicatorId});
+            idx = ownerCt.items.indexOf(field);
+            ownerCt.add(idx + 1, clone);
+        }
+    }
+
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">Ext.define(&#39;Ext.app.bindinspector.ComponentDetail&#39;, {
+    extend: &#39;Ext.panel.Panel&#39;,
+    alias: &#39;widget.bindinspector-componentdetail&#39;,
+    
+    requires: [
+        &#39;Ext.form.field.Display&#39;,
+        &#39;Ext.grid.Panel&#39;,
+        &#39;Ext.layout.container.VBox&#39;,
+        &#39;Ext.form.field.Checkbox&#39;,
+        &#39;Ext.app.bindinspector.Util&#39;
+    ],
+    
+    layout: &#39;border&#39;,
+    //borderRegionSwapMin: 1000, // see onCtResize
+
+    activeCls: Ext.baseCSSPrefix + &#39;bindinspector-stub-active&#39;,
+    descriptorCls: Ext.baseCSSPrefix + &#39;bindinspector-descriptor&#39;,
+    multipleCls: Ext.baseCSSPrefix + &#39;bindinspector-mult-val&#39;,
+    directCls: Ext.baseCSSPrefix + &#39;bindinspector-direct-val&#39;,
+    inheritedCls: Ext.baseCSSPrefix + &#39;bindinspector-inherited-val&#39;,
+    componentKeyCls: Ext.baseCSSPrefix + &#39;bindinspector-comp-key&#39;,
+    componentDescCls: Ext.baseCSSPrefix + &#39;bindinspector-comp-desc&#39;,
+    componentValCls: Ext.baseCSSPrefix + &#39;bindinspector-comp-val&#39;,
+    lastItemCls: Ext.baseCSSPrefix + &#39;bindinspector-last-item&#39;,
+
+    // the default view for the view model preview tab for when a component is clicked, but has no viewModel
+    vmPreviewDefault: {
+        xtype: &#39;container&#39;,
+        region: &#39;east&#39;,
+        split: true,
+        width: &#39;50%&#39;,
+        cls: Ext.baseCSSPrefix + &#39;bindinspector-prev-default&#39;,
+        padding: 20,
+        layout: {
+            type: &#39;hbox&#39;,
+            align: &#39;middle&#39;,
+            pack: &#39;center&#39;
+        },
+        items: [{
+            xtype: &#39;component&#39;,
+            flex: 1,
+            html: &#39;Select a component with a ViewModel (or inherited ViewModel) from the ComponentList to view the ViewModel details&#39;
+        }]
+    },
+    
+    initComponent: function() {
+        var me = this,
+            parentCt = me.up(&#39;bindinspector-container&#39;),
+            comp = me.component || {},
+            env = me.env,
+            publishes = comp.publishes,
+            bindings = comp.bindings,
+            title = &#39;Bindings &amp;nbsp;&amp;nbsp;&amp;nbsp;⇒ &amp;nbsp;&amp;nbsp;&amp;nbsp;&#39;,
+            vm = env.getInheritedVM(comp),
+            bindData, publishesTbar;
+
+        // the default view for the bindings preview tab for when a component is clicked, but has no bindings
+        me.bindingsPreviewDefault = {
+            xtype: &#39;panel&#39;,
+            border: false,
+            region: &#39;center&#39;,
+            cls: Ext.baseCSSPrefix + &#39;bindinspector-prev-default&#39;,
+            bodyPadding: 20,
+            layout: {
+                type: &#39;hbox&#39;,
+                align: &#39;middle&#39;,
+                pack: &#39;center&#39;
+            },
+            items: [{
+                xtype: &#39;component&#39;,
+                flex: 1,
+                html: &#39;Select a component with bindings from the ComponentList to view the bindings details along with the component\&#39;s inherited ViewModel&#39;
+            }],
+            dockedItems: [{
+                xtype: &#39;toolbar&#39;,
+                dock: &#39;top&#39;,
+                defaultButtonUI: &#39;default&#39;,
+                items: [&#39;-&gt;&#39;, {
+                    text: &#39;Open in dedicated tab&#39;,
+                    handler: function (btn) {
+                        btn.up(&#39;bindinspector-container&#39;).onComponentDblclick(null, comp);
+                    }
+                }]
+            }]
+        };
+
+        // add the component&#39;s reference to the title if it has a reference
+        if (comp.reference) {
+            title += &#39;[&#39; + comp.reference + &#39;] &amp;bull; &#39;;
+        }
+        
+        // build the bindings supporting data if the component has bindings and does not already have its bindData
+        bindData = comp.bindData || Ext.app.bindinspector.Util.buildBindData(bindings);
+
+        // add any publishes info the the top of the Component Detail grid
+        if (publishes) {
+            publishesTbar = [{
+                xtype: &#39;component&#39;,
+                html: &#39;Publishes: &amp;nbsp;&amp;nbsp;&lt;span style=&quot;color: #5C5C5C;font-size: 14px;line-height: 14px;&quot;&gt;&#39; + Ext.Object.getKeys(publishes).join(&#39; &amp;bull; &#39;) + &#39;&lt;/span&gt;&#39;
+            }];
+        }
+
+        // the config for the bindings grid itself (shown when a component with bindings is selected from the ComponentList tree)
+        me.bindingsGrid = {
+            xtype: &#39;gridpanel&#39;,
+            title: title += comp.id,
+            header: {
+                items: [{
+                    xtype: &#39;button&#39;,
+                    text: &#39;Open in dedicated tab&#39;,
+                    ui: &#39;default-toolbar&#39;,
+                    handler: function (btn) {
+                        btn.up(&#39;bindinspector-container&#39;).onComponentDblclick(null, comp);
+                    }
+                }]
+            },
+            region: &#39;center&#39;,
+            cls: Ext.baseCSSPrefix + &#39;bindinspector-compdetail-grid&#39;,
+            flex: 1,
+            hideHeaders: true,
+            store: {
+                model: me.BindingModel,
+                data: bindData
+            },
+            columns: [{
+                flex: 1,
+                scope: me,
+                renderer: me.bindingRenderer
+            }],
+            tbar: publishesTbar,
+            bbar: [{
+                xtype: &#39;checkboxfield&#39;,
+                itemId: &#39;highlightToggle&#39;,
+                boxLabel: &#39;Highlight VM target nodes on binding selection&#39;,
+                checked: true,
+                listeners: {
+                    scope: me,
+                    change: me.onHighlightChange
+                }
+            }],
+            viewConfig: {
+                stripeRows: false,
+                trackOver: false,
+                getRowClass: function (record, index, rowParams, store) {
+                    var cls = [];
+
+                    if (index === store.getCount() - 1) {
+                        cls.push(me.lastItemCls);
+                    }
+
+                    return cls.join(&#39; &#39;);
+                }
+            },
+            listeners: {
+                scope: me,
+                cellclick: me.onCellClick,
+                selectionchange: me.onSelectionChange
+            }
+        };
+
+        // the ViewModelDetail tree (shown when a component with a View Model is selected from the ComponentList tree)
+        me.viewModelTree = {
+            xtype: &#39;bindinspector-viewmodeldetail&#39;,
+            itemId: &#39;vm-&#39; + vm.id,
+            vm: vm,
+            region: &#39;east&#39;,
+            split: true,
+            width: &#39;50%&#39;,
+            height: &#39;50%&#39;
+        };
+
+        me.items = [];
+        me.items.push(bindings ? me.bindingsGrid : me.bindingsPreviewDefault);
+        me.items.push(vm ? me.viewModelTree : me.vmPreviewDefault);
+
+        me.callParent(arguments);
+    },
+
+    // renderer for the bindings colum to show the bindings key, descriptor, and value
+    bindingRenderer: function (v, meta, rec) {
+        var me = this,
+            binding = rec.get(&#39;binding&#39;),
+            key = rec.get(&#39;key&#39;),
+            descriptor = me.descriptorRenderer(rec.get(&#39;descriptor&#39;), meta, rec),
+            value = Ext.app.bindinspector.Util.valueRenderer(rec.get(&#39;value&#39;)),
+            src = &#39;&#39;,
+            bindingType = &#39;Direct&#39;;
+
+        // provide a default output for empty / null bindings values
+        if (Ext.isEmpty(value) || value === &#39;null&#39;) {
+            value = &#39;&lt;i&gt;No value found&lt;/i&gt;&#39;;
+        }
+
+        key = &#39;&lt;span class=&quot;&#39; + me.componentKeyCls + &#39;&quot;&gt;&#39; + key + &#39;: &lt;/span&gt;&#39;;
+        descriptor = &#39;&lt;span class=&quot;&#39; + me.componentDescCls + &#39;&quot;&gt;&#39; + descriptor + &#39;&lt;/span&gt;&#39;;
+        value = &#39;&lt;span class=&quot;&#39; + me.componentValCls + &#39;&quot;&gt;&#39; + value + &#39;&lt;/span&gt;&#39;;
+
+        if (binding.isTemplateBinding) {
+            bindingType = &#39;Template&#39;;
+        } else if (binding.isMultiBinding) {
+            bindingType = &#39;Multi&#39;
+        }
+        bindingType = Ext.util.Format.format(&#39;&lt;div data-qtip=&quot;Binding Type&quot; data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; class=&quot;&#39; + Ext.baseCSSPrefix + &#39;bindinspector-bind-type&quot;&gt;{0}&lt;/div&gt;&#39;, bindingType);
+
+        return key + descriptor + &#39;&lt;br&gt;&#39; + value + bindingType;
+    },
+
+    // handler for the highlight or don&#39;t highlight checkbox in the component detail grid
+    // selecting a binding detail node will highlight the source from the view model if the
+    // checkbox is checked
+    onHighlightChange: function (field) {
+        var vmDetail = this.down(&#39;bindinspector-viewmodeldetail&#39;),
+            compDetail = this.down(&#39;gridpanel&#39;),
+            selModel = compDetail.getSelectionModel();
+
+        // if the checkbox is not checked then remove the highlighting from the view model detail view
+        if (!field.checked) {
+            this.onSelectionChange(selModel, null, true)
+        } else { // else re-apply the highlighting
+            this.onSelectionChange(selModel, selModel.getSelection());
+        }
+    },
+    
+    // when the component detail node is selected highlight (if allowed by the highlight checkbox)
+    // the root data node from the view model detail tree
+    onSelectionChange: function (selModel, selected, clear) {
+        var vmDetail = this.down(&#39;bindinspector-viewmodeldetail&#39;),
+            store = vmDetail.getStore(),
+            tokens, binding, highlight, store, root, targets, highlighted;
+
+        if ((selected &amp;&amp; selected.length === 0) || clear === true) {
+            store.suspendEvents();
+            vmDetail.getStore().getRootNode().cascadeBy({
+                before: function (node) {
+                    node.set(&#39;highlighted&#39;, false);
+                }
+            });
+            store.resumeEvents();
+            vmDetail.getView().refresh();
+            return;
+        }
+
+        selected = selected[0];
+        tokens = selected.get(&#39;tokens&#39;);
+        binding = selected.get(&#39;binding&#39;);
+        highlight = this.down(&#39;#highlightToggle&#39;).checked;
+        store = vmDetail.getStore();
+        root = store.getRootNode();
+        targets = [];
+        
+        // get the node or nodes from which the bindings are bound
+        if (tokens &amp;&amp; highlight) {
+            if (binding.isTemplateBinding) {
+                Ext.Array.forEach(tokens, function(token) {
+                    targets.push(root.findChild(&#39;name&#39;, token[0]));
+                }, this);
+            } else if (binding.isMultiBinding) {
+                // TODO
+            } else {
+                targets.push(root.findChild(&#39;name&#39;, tokens[0]));
+            }
+        }
+
+        store.suspendEvents();
+        root.cascadeBy({
+            before: function (node) {
+                highlighted = targets.length === 0;
+                Ext.Array.forEach(targets, function (target) {
+                    if (node === target || node.isAncestor(target)) {
+                        highlighted = true;
+                    }
+                });
+
+                // this is set so that the view model detail panel&#39;s getRowClass
+                // can apply the styling depending on whether the node is bound to this
+                // particular binding (-1 highlights / fades since false means undecorated)
+                node.set(&#39;highlighted&#39;, highlighted || -1);
+            }
+        });
+        store.resumeEvents();
+        vmDetail.getView().refresh();
+        // select / focus the first targetable view model tree node
+        vmDetail.getSelectionModel().select(targets[0]);
+    },
+
+    // if the cell click is on a descriptor token focus on its data node in the
+    // view model tree
+    onCellClick: function(view, cell, colIdx, record, row, rowIdx, e) {
+        var target = e.getTarget(&#39;.&#39; + this.activeCls),
+            path;
+        
+        if (target) {
+            path = target.getAttribute(&#39;data-path&#39;);
+            this.showPath(path);
+        }
+    },
+    
+    showPath: function(path) {
+        this.selectPath(this.down(&#39;bindinspector-viewmodeldetail&#39;), path);
+    },
+
+    // select the view model tree&#39;s node using the passed path
+    // which is furnished by the onCellClick -&gt; showPath method
+    selectPath: function(tab, path) {
+        var node = tab.getRootNode(),
+            parts = path.split(&#39;.&#39;),
+            len = parts.length,
+            i;
+        
+        for (i = 0; node &amp;&amp; i &lt; len; ++i) {
+            node = this.getChildByKey(node, parts[i]);
+        }
+        
+        if (node) {
+            tab.getSelectionModel().select(node);
+        }
+    },
+    
+    getChildByKey: function(node, key) {
+        var childNodes = node.childNodes;
+        if (childNodes) {
+            return Ext.Array.findBy(childNodes, function(child) {
+                return child.get(&#39;name&#39;) === key;
+            });
+        }
+        return null;
+    },
+    
+    // extracts the descriptor markup for the component detail grid
+    descriptorRenderer: function(v, meta, rec) {
+        var binding = rec.get(&#39;binding&#39;),
+            descriptor = rec.get(&#39;descriptor&#39;),
+            tokens = rec.get(&#39;tokens&#39;);
+
+        v = v || &#39;&#39;;
+        
+        if (binding.isTemplateBinding) {
+            Ext.Array.forEach(tokens, function(token) {
+                var tokenRe = new RegExp(&#39;{&#39; + token.join(&#39;\\.&#39;) + &#39;}&#39;, &#39;g&#39;);
+                v = v.replace(tokenRe, this.parseTokens(token));
+            }, this);
+        } else if (binding.isMultiBinding) {
+            // TODO
+        } else {
+            return v.replace(descriptor, this.parseTokens(tokens));
+        }
+        return Ext.String.htmlEncode(v);
+    },
+    
+    // decorates the descriptor markup using the descriptor tokens from the binding
+    parseTokens: function(tokens) {
+        var me = this,
+            out = [],
+            vm = me.env.getInheritedVM(me.component),
+            currPath = &#39;&#39;,
+            currParent = vm.rootStub,
+            direct = false,
+            inherited = false,
+            addlCls = &#39;&#39;,
+            tip = &#39;&#39;,
+            baseToken = &#39;&#39;,
+            ownerVms, len, vmPlural;
+
+        tokens = tokens || [];
+        
+        Ext.Array.forEach(tokens, function(token) {
+            var stub = Ext.app.bindinspector.Util.getChildStub(token, currParent),
+                cls = &#39;&#39;,
+                value;
+                
+            if (stub) {
+                value = stub.value;
+                if (value !== undefined) {
+                    cls = me.activeCls;
+                }
+            } else {
+                // TODO Never here...
+            }
+            out.push(&#39;&lt;span data-path=&quot;&#39; + currPath + token + &#39;&quot; class=&quot;stub &#39; + cls + &#39;&quot;&gt;&#39; + token + &#39;&lt;/span&gt;&#39;);
+            currPath += token + &#39;.&#39;;
+            currParent = stub;
+        }, me);
+
+        // determine whether a binding&#39;s source can be found on the nearest view model, is
+        // inherited from some ancestor view model, or is on both this view model and an ancestor
+        if (tokens[0]) {
+            baseToken = tokens[0];
+            ownerVMs = vm.dataMap[tokens[0]].ownerVMs;
+            len = ownerVMs.length;
+            Ext.Array.forEach(ownerVMs, function (v) {
+                if (v.id === vm.id) {
+                    direct = true;
+                }
+                if (v.id !== vm.id) {
+                    inherited = true;
+                }
+            });
+        }
+
+        // set the class for the descriptor markup depending on whether the date source
+        // is direct, inherited, or direct, but with ancestor view models also posessing the data
+        if (direct &amp;&amp; inherited) {
+            addlCls += &#39; &#39; + me.multipleCls;
+            vmPlural = len &gt; 1 ? &#39;VMs&#39; : &#39;VM&#39;;
+            tip = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&lt;b&gt;&#39; + baseToken + &#39;&lt;/b&gt;&amp;nbsp; provided by this VM and &#39; + (len - 1) + &#39; ancestor &#39; + vmPlural + &#39;&quot;&#39;;
+        } else if (direct) {
+            addlCls += &#39; &#39; + me.directCls;
+            tip = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&lt;b&gt;&#39; + baseToken + &#39;&lt;/b&gt;&amp;nbsp; is provided by this VM&quot;&#39;;
+        } else if (inherited) {
+            addlCls += &#39; &#39; + me.inheritedCls;
+            vmPlural = len &gt; 1 ? &#39;VMs&#39; : &#39;VM&#39;;
+            tip = &#39;data-qclass=&quot;&#39; + Ext.baseCSSPrefix + &#39;componentlist-tip&quot; data-qtip=&quot;&lt;b&gt;&#39; + baseToken + &#39;&lt;/b&gt;&amp;nbsp; is provided by &#39; + len + &#39; ancestor &#39; + vmPlural + &#39;&quot;&#39;;
+        }
+
+        return &#39;&lt;span &#39; + tip + &#39;class=&quot;&#39; + me.descriptorCls + addlCls + &#39;&quot;&gt;{&#39; + out.join(&#39;.&#39;) + &#39;}&lt;/span&gt;&#39;;
+    }
+}, function() {
+    this.prototype.BindingModel = Ext.define(null, {
+        extend: &#39;Ext.data.Model&#39;,
+        
+        fields: [&#39;key&#39;, &#39;descriptor&#39;, &#39;tokens&#39;, &#39;value&#39;, &#39;binding&#39;]
+    });
+});</pre>
+</body>
+</html>
