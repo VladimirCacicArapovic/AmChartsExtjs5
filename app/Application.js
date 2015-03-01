@@ -9,7 +9,9 @@ Ext.define('AmChart.Application', {
     name: 'AmChart',
 
     stores: [
-        // TODO: add global / shared stores here
+       'AmChartStore'
+    ],
+    views:[
     ],
     
     launch: function () {
