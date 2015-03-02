@@ -1,8 +1,5 @@
 Ext.define('AmChart.view.main.Column', {
         extend: 'Ext.ux.chart.AmCharts',
-        requires: [
-            'Ext.ux.chart.AmCharts'
-        ],
         alias: 'widget.columnchart',
         title: 'AmCharts',
 
