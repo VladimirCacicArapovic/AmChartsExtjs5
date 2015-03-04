@@ -2,842 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a07c5d8-88ab-419d-9a4b-ad37b8f8ae0e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/source/AmCharts.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Animation.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/view/main/Animation.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/model/AnimationModel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/store/AnimationStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/output/Ext.ux.chart.AmCharts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/data-89a6c16e4d14af3be4645fbdc4aa4867.js" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\data-d4f56aecfe3f46e2b1c7e0196d2239ab.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\AmChart.Application.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\AmChart.view.main.Main.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\AmChart.view.main.MainController.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\AmChart.view.main.MainModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.Action.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.Component.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ComponentLoader.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.Editor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ElementLoader.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.EventManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.FocusManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.Img.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.LoadMask.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.MessageBox.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ProgressBar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ProgressBarWidget.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.WindowManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ZIndexManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.app.bindinspector.Environment.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.app.bindinspector.Util.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.button.Button.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.button.Cycle.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.button.Manager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.button.Segmented.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.button.Split.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.container.ButtonGroup.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.container.Container.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.container.DockingContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.container.Monitor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.container.Viewport.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dashboard.Column.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dashboard.Dashboard.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dashboard.DropZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dashboard.Panel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dashboard.Part.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DD.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DDProxy.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DDTarget.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DragDrop.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DragDropElement.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DragDropManager.ElementWrapper.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DragDropManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DragSource.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DragTracker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DragZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DropTarget.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.DropZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.Registry.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.ScrollManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dd.StatusProxy.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dom.ButtonElement.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.dom.Layer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.enums.Feature.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.enums.Layout.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.enums.Plugin.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.enums.Widget.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.event.publisher.MouseEnterLeave.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.flash.Component.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.Basic.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.CheckboxGroup.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.CheckboxManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.FieldAncestor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.FieldContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.FieldSet.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.Label.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.Labelable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.Panel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.RadioGroup.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.RadioManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.action.Action.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.action.DirectAction.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.action.DirectLoad.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.action.DirectSubmit.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.action.Load.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.action.StandardSubmit.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.action.Submit.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Base.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Checkbox.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.ComboBox.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Date.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Display.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Field.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.File.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.FileButton.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Hidden.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.HtmlEditor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Number.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Picker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Radio.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Spinner.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Tag.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Text.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.TextArea.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Time.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.Trigger.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.field.VTypes.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.trigger.Component.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.trigger.Spinner.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.form.trigger.Trigger.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.Anim.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.Animator.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.CubicBezier.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.DrawPath.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.Easing.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.Manager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.PropertyHandler.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.Queue.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.Component.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.CompositeElement.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.CompositeElementCSS.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.CompositeSprite.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.Element.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.ElementCSS.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.Sprite.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.fx.target.Target.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.CellContext.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.CellEditor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.ColumnComponentLayout.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.ColumnLayout.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.ColumnManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.NavigationModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.Panel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.RowEditor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.RowEditorButtons.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.ViewDropZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Action.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Boolean.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Check.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Column.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Date.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Number.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.RowNumberer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Template.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.column.Widget.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.feature.AbstractSummary.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.feature.Feature.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.feature.GroupStore.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.feature.Grouping.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.feature.GroupingSummary.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.feature.RowBody.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.feature.Summary.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.Filters.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.Base.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.Boolean.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.Date.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.List.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.Number.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.SingleFilter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.String.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.filters.filter.TriFilter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.header.Container.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.header.DragZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.header.DropZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.locking.HeaderContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.locking.Lockable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.locking.RowSynchronizer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.locking.View.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.BufferedRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.CellEditing.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.Clipboard.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.DragDrop.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.Editing.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.HeaderReorderer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.HeaderResizer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.RowEditing.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.plugin.RowExpander.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.property.Grid.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.property.HeaderContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.property.Property.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.property.Reader.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.property.Store.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.selection.Cells.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.selection.Columns.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.selection.Rows.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.selection.Selection.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.grid.selection.SpreadsheetModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.Context.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.ContextItem.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.Layout.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.SizeModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.SizePolicy.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.Auto.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.Body.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.BoundList.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.Component.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.Dock.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.FieldSet.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.ProgressBar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.field.FieldContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.component.field.HtmlEditor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Absolute.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Accordion.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Anchor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Auto.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Border.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Box.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Card.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Center.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.CheckboxGroup.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Column.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.ColumnSplitter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.ColumnSplitterTracker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Container.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Dashboard.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Editor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Fit.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Form.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.HBox.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.Table.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.VBox.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.boxOverflow.Menu.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.boxOverflow.None.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.layout.container.boxOverflow.Scroller.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.menu.CheckItem.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.menu.ColorPicker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.menu.DatePicker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.menu.Item.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.menu.Manager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.menu.Menu.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.menu.Separator.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Bar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.DD.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Header.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Panel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Pinnable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Proxy.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Table.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Title.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.panel.Tool.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.picker.Color.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.picker.Date.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.picker.Month.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.picker.Time.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.plugin.AbstractClipboard.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.plugin.Manager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.plugin.Responsive.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.plugin.Viewport.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.resizer.BorderSplitter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.resizer.BorderSplitterTracker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.resizer.Handle.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.resizer.ResizeTracker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.resizer.Resizer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.resizer.Splitter.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.resizer.SplitterTracker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.selection.CellModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.selection.CheckboxModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.selection.DataViewModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.selection.Model.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.selection.RowModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.selection.TreeModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.slider.Multi.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.slider.Single.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.slider.Thumb.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.slider.Tip.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.slider.Widget.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.Bar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.BarBase.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.Base.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.Box.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.Bullet.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.CanvasCanvas.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.Discrete.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.Line.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.Pie.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.RangeMap.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.TriState.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.sparkline.VmlCanvas.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.state.CookieProvider.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.state.LocalStorageProvider.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.state.Manager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.state.Provider.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.state.Stateful.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tab.Bar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tab.Panel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tab.Tab.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tip.QuickTip.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tip.QuickTipManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tip.Tip.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tip.ToolTip.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.Breadcrumb.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.Fill.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.Item.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.Paging.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.Separator.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.Spacer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.TextItem.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.toolbar.Toolbar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tree.Column.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tree.NavigationModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tree.Panel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tree.View.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tree.ViewDragZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tree.ViewDropZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.tree.plugin.TreeViewDragDrop.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.Animate.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.CSS.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.ClickRepeater.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.ComponentDragger.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.Cookies.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.ElementContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.Floating.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.Focusable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.FocusableContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.KeyMap.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.KeyNav.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.Memento.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.ProtoElement.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.Queue.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.Renderable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.util.StoreHolder.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.BoxReorderer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.CellDragDrop.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.DataTip.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.DataView.Animated.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.DataView.DragSelector.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.DataView.Draggable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.DataView.LabelEditor.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.DataViewTransition.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.Explorer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.FieldReplicator.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.GMapPanel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.GroupTabPanel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.GroupTabRenderer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.IFrame.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.LiveSearchGridPanel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.PreviewPlugin.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ProgressBarPager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.RowExpander.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.SlidingPager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.Spotlight.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.TabCloseMenu.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.TabReorderer.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.TabScrollerMenu.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ToolbarDroppable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.TreePicker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ajax.DataSimlet.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ajax.JsonSimlet.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ajax.SimManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ajax.SimXhr.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ajax.Simlet.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.ajax.XmlSimlet.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.dashboard.GoogleRssPart.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.dashboard.GoogleRssView.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.data.PagingMemoryProxy.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.desktop.App.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.desktop.Desktop.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.desktop.ShortcutModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.desktop.StartMenu.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.desktop.TaskBar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.desktop.TrayClock.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.desktop.Wallpaper.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.event.Driver.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.event.Maker.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.event.Player.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.event.Recorder.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.event.RecorderManager.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.form.ItemSelector.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.form.MultiSelect.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.google.Api.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.google.Feeds.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.grid.SubTable.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.grid.TransformGrid.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.statusbar.StatusBar.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.ux.statusbar.ValidationStatus.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.AbstractView.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.BoundList.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.BoundListKeyNav.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.DragZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.DropZone.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.MultiSelector.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.MultiSelectorSearch.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.NavigationModel.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.NodeCache.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.Table.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.TableLayout.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.view.View.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.window.MessageBox.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.window.Toast.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\Ext.window.Window.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\output\global.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Absolute.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Absolute2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\AbstractClipboard.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\AbstractSummary.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\AbstractView.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Accordion.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Action.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Action2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Action3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Anchor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Anim.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Animate.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Animated.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Animator.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Api.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\App.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Application.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Auto.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Auto2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Bar.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Bar2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Bar3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Bar4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Bar5.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BarBase.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Base.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Base2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Base3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BaseModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Basic.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Body.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Boolean.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Boolean2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Border.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Border2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BorderSplitter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BorderSplitterTracker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BorderSplitterTracker2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BoundList.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BoundList2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BoundListKeyNav.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Box.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Box2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Box3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BoxReorderer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Breadcrumb.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\BufferedRenderer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Bullet.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Button.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Button2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ButtonElement.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ButtonGroup.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CSS.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CanvasBase.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CanvasCanvas.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Card.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CellContext.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CellDragDrop.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CellEditing.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CellEditor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CellEditor2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CellFieldDropZone.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CellModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Cells.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Center.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Chart.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Chart2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Check.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CheckItem.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Checkbox.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CheckboxGroup.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CheckboxGroup2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CheckboxManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CheckboxModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ClickRepeater.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Clipboard.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Color.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ColorPicker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Column.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Column2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Column3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Column4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Column5.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Column6.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Column7.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ColumnComponentLayout.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ColumnLayout.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ColumnLayout2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ColumnManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ColumnSplitter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ColumnSplitterTracker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Columns.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ComboBox.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Component.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Component2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Component3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Component4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Component5.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Component6.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ComponentDetail.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ComponentDragger.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ComponentList.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ComponentLoader.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CompositeElement.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CompositeElementCSS.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CompositeSprite.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Container.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Container2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Container3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Container4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Context.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ContextItem.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ContextItem2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CookieProvider.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Cookies.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\CubicBezier.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Cycle.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DD.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DD2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DD3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DDProxy.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DDTarget.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Dashboard.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Dashboard2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DataSimlet.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DataTip.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DataViewModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DataViewTransition.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Date.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Date2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Date3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Date4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DatePicker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Desktop.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DirectAction.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DirectLoad.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DirectSubmit.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Discrete.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Display.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Dock.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Dock2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DockingContainer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DomScroller.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragDrop.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragDrop2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragDropManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragSelector.css.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragSelector.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragSource.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragTracker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragZone.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragZone2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DragZone3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Draggable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DrawPath.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Driver.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DropTarget.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DropZone.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DropZone2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DropZone3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\DropZone4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Easing.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Editing.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Editor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Editor2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Element.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Element2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ElementCSS.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ElementContainer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ElementLoader.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Environment.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Event.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\EventManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\EventsGraphModal.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Explorer.css.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Explorer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Feature.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Feeds.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Field.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FieldAncestor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FieldContainer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FieldContainer2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FieldReplicator.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FieldSet.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FieldSet2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\File.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\File2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FileButton.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FileButton2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Fill.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Filters.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Fit.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Floating.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FocusManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Focusable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FocusableContainer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\FocusableContainer2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Form.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GMapPanel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GoogleRssPart.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GoogleRssView.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Grid.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GroupStore.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GroupTabPanel.css.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GroupTabPanel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GroupTabRenderer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Grouping.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\GroupingSummary.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HBox.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HBox2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Handle.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Header.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HeaderContainer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HeaderContainer2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HeaderReorderer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HeaderResizer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HeaderResizer2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Hidden.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HtmlEditor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\HtmlEditor2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\IFrame.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Img.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Indicator.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Inspector.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Item.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Item2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ItemSelector.css.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ItemSelector.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\JsonSimlet.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\KeyMap.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\KeyNav.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Label.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\LabelEditor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Labelable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Labelable2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Layer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Layout.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Line.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\List.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\LiveSearchGridPanel.css.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\LiveSearchGridPanel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Load.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\LoadMask.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\LocalStorageProvider.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Lockable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Main.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\MainController.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\MainModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Maker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Manager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Manager2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Manager3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Manager4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Manager5.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Memento.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Menu.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Menu2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Menu3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\MessageBox.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Model.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Module.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Monitor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Month.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\MouseEnterLeave.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Multi.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Multi2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\MultiSelect.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\MultiSelector.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\MultiSelectorSearch.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\NavigationModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\NavigationModel2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\NavigationModel3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\NavigationModel4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\NavigationModel5.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\NodeCache.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\None.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Number.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Number2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Number3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Paging.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\PagingMemoryProxy.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Panel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Panel2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Panel3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Panel4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Panel5.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Panel6.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Panel7.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\PanelFieldDragZone.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Part.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Picker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Pie.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Pinnable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Player.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\PreviewPlugin.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ProgressBar.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ProgressBar2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ProgressBarPager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ProgressBarWidget.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Property.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\PropertyHandler.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ProtoElement.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Provider.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Proxy.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Queue.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Queue2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\QuickTip.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\QuickTipManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\QuickTipManager2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Radio.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RadioGroup.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RadioManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RangeMap.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Reader.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Recorder.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RecorderManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Region.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Registry.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Renderable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Renderable2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ResizeTracker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ResizeTracker2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Resizer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Responsive.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowBody.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowEditing.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowEditing2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowEditor.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowEditorButtons.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowExpander.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowExpander2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowNumberer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\RowSynchronizer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Rows.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ScrollManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Scroller.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Scroller2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Scroller3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Scroller4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SearchField.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Segmented.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Segmented2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SegmentedButton.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Selection.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Separator.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Separator2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Serial.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Shape.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ShortcutModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SimManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SimXhr.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Simlet.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Single.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SingleFilter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SizeModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SizePolicy.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SlidingPager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Spacer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Spinner.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Spinner2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Split.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Splitter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SplitterTracker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SplitterTracker2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Spotlight.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SpreadsheetModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Sprite.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\StandardSubmit.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\StartMenu.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Stateful.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\StatusBar.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\StatusProxy.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Store.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\StoreHolder.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\String.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\SubTable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Submit.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Summary.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Summary2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Tab.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TabCloseMenu.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TabReorderer.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TabScrollerMenu.css.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TabScrollerMenu.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Table.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Table2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Table3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Table4.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TableLayout.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Tag.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Target.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TaskBar.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Template.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Text.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TextArea.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TextItem.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Thumb.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Time.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Time2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Tip.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Tip2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Title.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Title2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Toast.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Tool.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ToolTip.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Toolbar.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ToolbarDroppable.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TouchScroller.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TransformGrid.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TreeModel.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TreePicker.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TreeViewDragDrop.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TriFilter.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\TriState.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Trigger.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Trigger2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Util.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\VBox.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\VBox2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\VTypes.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ValidationStatus.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Video.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\View.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\View2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\View3.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ViewDragZone.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ViewDropZone.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ViewDropZone2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ViewModelDetail.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Viewport.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Viewport2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\VmlCanvas.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Wallpaper.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Widget.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Widget2.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\Window.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\XmlSimlet.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\ZIndexManager.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\enums.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\amchart\docs\source\statusbar.css.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Application.js" afterPath="$PROJECT_DIR$/app/Application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/main/Main.js" afterPath="$PROJECT_DIR$/app/view/main/Main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/view/main/Pie.js" afterPath="$PROJECT_DIR$/app/view/main/Pie.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Readme.md" afterPath="$PROJECT_DIR$/Readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/source/AmCharts.html" afterPath="$PROJECT_DIR$/docs/source/AmCharts.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/index.html" afterPath="$PROJECT_DIR$/docs/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -884,20 +49,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AmCharts.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AmCharts.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ext/src/ux/chart/AmCharts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2771">
-              <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-              <folding />
+            <state vertical-scroll-proportion="-0.5543478" vertical-offset="442" max-vertical-offset="2975">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Pie.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Pie.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/main/Pie.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7021739" vertical-offset="0" max-vertical-offset="476">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
               <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
               <folding />
             </state>
@@ -907,9 +74,21 @@
       <file leaf-file-name="Window.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ext/src/window/Window.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15895">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="28" selection-end-column="3" />
+            <state vertical-scroll-proportion="-3.1162791" vertical-offset="14435" max-vertical-offset="15895">
+              <caret line="857" column="34" selection-start-line="857" selection-start-column="28" selection-end-line="857" selection-end-column="34" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Toast.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ext/src/window/Toast.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10472">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -917,8 +96,8 @@
       <file leaf-file-name="Readme.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-36.44" vertical-offset="24" max-vertical-offset="1071">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.12" vertical-offset="0" max-vertical-offset="442">
+              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -949,16 +128,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2465">
               <caret line="3" column="28" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Animation.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/Animation.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1002" max-vertical-offset="1530">
-              <caret line="84" column="1" selection-start-line="84" selection-start-column="1" selection-end-line="84" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -1000,9 +169,9 @@
         <option value="$PROJECT_DIR$/app/view/main/Animation.js" />
         <option value="$PROJECT_DIR$/resources/Animation.css" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/app/view/main/Pie.js" />
         <option value="$PROJECT_DIR$/Readme.md" />
         <option value="$PROJECT_DIR$/ext/src/ux/chart/AmCharts.js" />
-        <option value="$PROJECT_DIR$/app/view/main/Pie.js" />
       </list>
     </option>
   </component>
@@ -1330,7 +499,19 @@
       <option name="project" value="LOCAL" />
       <updated>1425256404432</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Second  Updates to the AmChart Extjs module">
+      <created>1425427290029</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1425427290029</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Read me change">
+      <created>1425427430326</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1425427430326</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1338,7 +519,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32872927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32872927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32872927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1399,21 +580,15 @@
     <MESSAGE value="First Project commit" />
     <MESSAGE value="Starting point for xtype" />
     <MESSAGE value="First Updates to the AmChart Extjs module" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Updates to the AmChart Extjs module" />
+    <MESSAGE value="Second  Updates to the AmChart Extjs module" />
+    <MESSAGE value="Read me change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Read me change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="408">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="5678">
@@ -1426,7 +601,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="1938">
           <caret line="86" column="79" selection-start-line="86" selection-start-column="79" selection-end-line="86" selection-end-column="79" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1500,7 +677,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1026" max-vertical-offset="1938">
           <caret line="86" column="79" selection-start-line="86" selection-start-column="79" selection-end-line="86" selection-end-column="79" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1746,22 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="459">
-          <caret line="11" column="72" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/AmChartStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ext/src/form/Basic.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="19618">
@@ -1786,35 +949,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Readme.md">
+    <entry file="file://$PROJECT_DIR$/app/view/main/Pie.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-36.44" vertical-offset="24" max-vertical-offset="1071">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ext/src/ux/chart/AmCharts.js">
+    <entry file="file://$PROJECT_DIR$/Readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2652">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+        <state vertical-scroll-proportion="-6.12" vertical-offset="0" max-vertical-offset="442">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="459">
+          <caret line="11" column="72" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ext/src/window/Window.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15895">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="28" selection-end-column="3" />
+        <state vertical-scroll-proportion="-3.1162791" vertical-offset="14435" max-vertical-offset="15895">
+          <caret line="857" column="34" selection-start-line="857" selection-start-column="28" selection-end-line="857" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/main/Pie.js">
+    <entry file="file://$PROJECT_DIR$/ext/src/window/Toast.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7021739" vertical-offset="0" max-vertical-offset="476">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10472">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/AmChartStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
+          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ext/src/ux/chart/AmCharts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5543478" vertical-offset="442" max-vertical-offset="2975">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
