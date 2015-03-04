@@ -53,3 +53,6 @@ Add store to the chartConfig object :
 
 And here is best way how to build proper documentation with jsduck
 jsduck ext/src app --output docs
+
+And for this module I was using:
+jsduck ext/src/ux/chart/ --output docs

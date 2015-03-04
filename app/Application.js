@@ -9,7 +9,8 @@ Ext.define('AmChart.Application', {
     name: 'AmChart',
 
     stores: [
-       'AmChartStore'
+       'AmChartStore',
+        'AnimationStore'
     ],
     views:[
     ],

@@ -1,11 +1,11 @@
 Ext.define('AmChart.view.main.Pie', {
         extend: 'Ext.ux.chart.AmCharts',
         alias: 'widget.piechart',
-        itle: 'AmCharts',
+        title: 'AmCharts',
 
         chartConfig: {
-            "type": "pie",
-            "theme": "none",
+            type: "pie",
+            theme: "none",
             stores: ['AmChartStore'],
             valueField: "visits",
             titleField: "country",
@@ -18,7 +18,6 @@ Ext.define('AmChart.view.main.Pie', {
                 exportSVG: true
             }
         }
-
 
     }
 );

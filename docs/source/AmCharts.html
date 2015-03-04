@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='Ext-ux-chart-AmCharts'>/**
+</span> * @class Ext.ux.chart.AmCharts
+ * @extends Ext.Component
+ * This Chart module provides showing real Am chart System.
+ * Each Chart connect connect directy to the store (stores:[&#39;store&#39;])
+ * To change the look and feel of a chart, see the {@link http://docs.amcharts.com/3/javascriptcharts} config options.
+ *
+ *
+ *
+ *     @example
+ *     Ext.define(&#39;AmChart.view.main.Pie&#39;, {
+ *         extend: &#39;Ext.ux.chart.AmCharts&#39;,
+ *         alias: &#39;widget.piechart&#39;,
+ *         title: &#39;AmCharts&#39;,
+ *         chartConfig: {
+ *              type: &quot;pie&quot;,
+ *              theme: &quot;none&quot;,
+ *              stores: [&#39;AmChartStore&#39;],
+ *              valueField: &quot;visits&quot;,
+ *              titleField: &quot;country&quot;,
+ *               amExport: {
+ *                  top: 10,
+ *                  right: 20,
+ *                  exportJPG: true,
+ *                  exportPNG: true,
+ *                  exportSVG: true
+ *                  }
+ *         }
+ *     });
+ */
+Ext.define(&quot;Ext.ux.chart.AmCharts&quot;, {
+    extend: &#39;Ext.Component&#39;,
+    alias: &#39;widget.amchart&#39;,
+<span id='Ext-ux-chart-AmCharts-cfg-loadMask'>    /**
+</span>     * @cfg {boolean} loadMask An {@link Ext.LoadMask} config or true to mask the chart while
+     * loading. Defaults to false.
+     */
+    loadMask: false,
+<span id='Ext-ux-chart-AmCharts-cfg-firstLoader'>    /**
+</span>     * @cfg {boolean}
+     * Triggered after component gets first loading.
+     * @param {Ext.Component}
+     */
+    firstLoader: true,
+    // Create getter and setter function
+    config: {
+<span id='Ext-ux-chart-AmCharts-cfg-title'>        title: &#39;&#39;,
+</span><span id='Ext-ux-chart-AmCharts-cfg-subTitle'>        subTitle: &#39;&#39;,
+</span><span id='Ext-ux-chart-AmCharts-cfg-timeout'>        timeout: 500
+</span>    },
+<span id='Ext-ux-chart-AmCharts-property-listeners'>    listeners: {
+</span>        resize: {
+            fn: function (el) {
+                if (!this.firstLoader) {
+                    this.resize();
+                }
+                this.firstLoader = false;
+            }
+        }
+    },
+
+<span id='Ext-ux-chart-AmCharts-method-initComponent'>    /**
+</span>     *  Init starting function
+     */
+    initComponent: function () {
+        // If this.stores is defined, then ignore this.store even is defined
+        this.stores = Ext.data.StoreManager.lookup(this.chartConfig.stores[0]);
+        this.callParent(arguments);
+    },
+
+<span id='Ext-ux-chart-AmCharts-method-initEvents'>    /**
+</span>     * Loading mask for component
+     */
+    initEvents: function () {
+        if (this.loadMask) {
+            this.loadMask = new Ext.LoadMask(this.el);
+        }
+    },
+
+<span id='Ext-ux-chart-AmCharts-method-afterRender'>    /**
+</span>     * After render function
+     * - Loading Stores
+     * - Then render chart with first data
+     */
+    afterRender: function () {
+        //Check Stores and prepare data
+        this.storeCheck();
+        this.chart = AmCharts.makeChart(this.getEl().id, this.chartConfig, this.getTimeout());
+    },
+<span id='Ext-ux-chart-AmCharts-method-storeCheck'>    /**
+</span>     * Checking if store exist
+     * @returns {boolean}
+     */
+    storeCheck: function () {
+        if (typeof this.chartConfig.stores !== &#39;undefined&#39;) {
+            if (this.chartConfig.stores.length &gt;= 1) {
+                //Preparing Data for the stores
+                this.loadingChartStoresColumn();
+            } else {
+                Ext.Msg.alert(&#39;Store error&#39;, &#39;Store is not defined&#39;);
+                return false;
+            }
+
+        } else {
+            Ext.Msg.alert(&#39;Store error&#39;, &#39;Store is not defined&#39;);
+            return false;
+        }
+    },
+
+<span id='Ext-ux-chart-AmCharts-method-loadingChartStoresColumn'>    /**
+</span>     * Preparing Data for the store
+     */
+    loadingChartStoresColumn: function () {
+        var store = this.stores.data.items,
+            storeLength = store.length,
+            fileObject = [];
+        for (var i = 0; i &lt; storeLength; i++) {
+            var storeData = store[i].getData();
+            this.validateStore(storeData);
+            fileObject.push(storeData);
+        }
+        this.chartConfig.dataProvider = fileObject;
+    },
+
+<span id='Ext-ux-chart-AmCharts-method-resize'>    /**
+</span>     * Resize Functionality
+     */
+    resize: function () {
+        this.chart.validateSize();
+    },
+
+<span id='Ext-ux-chart-AmCharts-method-reloadData'>    /**
+</span>     * Reload Data functionality
+     */
+    reloadData: function () {
+        this.chart.validateData()
+    },
+
+<span id='Ext-ux-chart-AmCharts-method-validateStore'>    /**
+</span>     * Validating Pie chart to see error in code
+     * @param data
+     * @returns {boolean}
+     */
+    validateStore: function (data) {
+        if (typeof this.chartConfig.type !== &#39;undefined&#39;) {
+            if (this.chartConfig.type === &#39;pie&#39;) {
+                if (typeof data[this.chartConfig.valueField] !== &#39;number&#39;) {
+                    Ext.Msg.alert(&#39;Store error&#39;, &#39;Wrong type data (&#39; + this.chartConfig.valueField + &#39;) in the store&#39;);
+                    return false;
+                }
+            }
+        } else {
+            Ext.Msg.alert(&#39;Chart type error&#39;, &#39;Chart type is not defined&#39;);
+            return false;
+        }
+    }
+});
+</pre>
+</body>
+</html>

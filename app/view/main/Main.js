@@ -9,7 +9,8 @@ Ext.define('AmChart.view.main.Main', {
     extend: 'Ext.container.Container',
     requires:[
         'AmChart.view.main.Column',
-        'AmChart.view.main.Pie'
+        'AmChart.view.main.Pie',
+        'AmChart.view.main.Animation'
     ],
     xtype: 'app-main',
 
@@ -30,6 +31,12 @@ Ext.define('AmChart.view.main.Main', {
             {
                 xtype:'piechart',
                 title:'Pie Chart',
+                timeout:200
+
+            },
+            {
+                xtype:'animation',
+                title:'Animation Chart',
                 timeout:200
 
             }
