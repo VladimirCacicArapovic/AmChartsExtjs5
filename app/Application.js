@@ -3,6 +3,11 @@
  * Ext.application(). This is the ideal place to handle application launch and initialization
  * details.
  */
+Ext.Loader.setConfig({    enabled: true,
+    paths: {
+        'Ext.ux.chart': './ux/chart/'
+    }
+});
 Ext.define('AmChart.Application', {
     extend: 'Ext.app.Application',
     
